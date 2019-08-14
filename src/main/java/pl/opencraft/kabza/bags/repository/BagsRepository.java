@@ -10,7 +10,7 @@ import java.util.UUID;
  * Created by Marcin Zielonka on 14/08/2019.
  */
 
-public interface BagRepository {
+public interface BagsRepository {
 
     Optional<Bag> findBag(UUID uuid);
     List<Bag> findAll();
