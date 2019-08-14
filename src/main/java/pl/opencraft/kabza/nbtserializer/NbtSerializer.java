@@ -8,7 +8,6 @@ import pl.opencraft.kabza.nbtserializer.dto.NbtTagDto;
 import pl.opencraft.kabza.nbtserializer.dto.NbtTagType;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -48,7 +47,7 @@ public class NbtSerializer implements NbtSerializerFacade {
                     return this.deserialize(dto);
                 })
                 .map(Optional::get)
-                .orElseThrow(NbtSerializationException::new);
+                .orElseThrow(() -> new NbtSerializationException("Unable to create/update NBT tags with given ItemStack and/or id"));
     }
 
     @Override
@@ -58,7 +57,7 @@ public class NbtSerializer implements NbtSerializerFacade {
                 .map(rootTag -> rootTag.getFromCompound("tag"))
                 .map(tagTag -> tagTag.getFromCompound(id))
                 .map(NbtTagDto::getTagCompound)
-                .orElse(new HashMap<>());
+                .orElseThrow(() -> new NbtSerializationException("Unable to read NBT tags with given ItemStack and/or id"));
     }
 
     @Override
