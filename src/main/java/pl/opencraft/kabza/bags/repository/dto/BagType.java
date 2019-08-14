@@ -17,7 +17,7 @@ public class BagType {
 
     private String bagId;
     private String bagName;
-    private String bagDescription;
+    private List<String> bagDescription;
     private Material bagItemType;
     private boolean craftingEnabled;
     private Material[] craftingRecipe;

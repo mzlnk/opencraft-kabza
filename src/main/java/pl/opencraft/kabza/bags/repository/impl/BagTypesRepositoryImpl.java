@@ -46,7 +46,7 @@ public class BagTypesRepositoryImpl implements BagTypesRepository {
             BagType bagType = BagType.builder()
                     .bagId(config.getString("bag_id", file.getName().substring(0, file.getName().length() - 5)))
                     .bagName(config.getString("bag_name", "Kabza"))
-                    .bagDescription(config.getString("bag_description", ""))
+                    .bagDescription(config.getStringList("bag_description"))
                     .bagItemType(Material.getMaterial(config.getString("bag_item_type", "CHEST")))
                     .craftingEnabled(config.getBoolean("crafting_enabled", false))
                     .craftingRecipe((Material[]) config.getStringList("crafting_recipe").toArray())
