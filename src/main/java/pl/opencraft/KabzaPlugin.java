@@ -1,6 +1,8 @@
 package pl.opencraft;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.opencraft.kabza.bags.service.BagService;
+import pl.opencraft.kabza.bags.service.BagServiceImpl;
 import pl.opencraft.kabza.commands.executor.KabzaCommandExecutor;
 
 import static org.bukkit.ChatColor.*;
@@ -15,12 +17,16 @@ public class KabzaPlugin extends JavaPlugin {
 
     public static KabzaPlugin plugin;
 
+    public BagService bagService;
+
     public KabzaPlugin() {
         plugin = this;
     }
 
     @Override
     public void onEnable() {
+        bagService = new BagServiceImpl();
+
         registerCommands();
     }
 
