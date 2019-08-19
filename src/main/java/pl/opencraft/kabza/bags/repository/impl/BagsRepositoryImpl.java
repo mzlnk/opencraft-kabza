@@ -40,6 +40,18 @@ public class BagsRepositoryImpl implements BagsRepository {
         this.saveBag(bag);
     }
 
+    @Override
+    public void removeBag(UUID uuid) {
+        bags.remove(uuid);
+        plugin.fileUtil.removeFile(FileUtil.Directory.BAGS, uuid.toString() + ".json");
+    }
+
+    @Override
+    public void reload() {
+        bags.clear();
+        this.loadBags();
+    }
+
     private void loadBags() {
         plugin.fileUtil.listFiles(FileUtil.Directory.BAGS).stream().forEach(file -> {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {

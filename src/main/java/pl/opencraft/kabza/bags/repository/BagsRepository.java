@@ -15,5 +15,7 @@ public interface BagsRepository {
     Optional<Bag> findBag(UUID uuid);
     List<Bag> findAll();
     void createOrUpdateBag(Bag bag);
+    void removeBag(UUID uuid);
+    void reload();
 
 }

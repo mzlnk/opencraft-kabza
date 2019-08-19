@@ -1,5 +1,7 @@
 package pl.opencraft.kabza.bags.service.impl;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import pl.opencraft.kabza.bags.repository.BagTypesRepository;
 import pl.opencraft.kabza.bags.repository.dto.BagType;
 import pl.opencraft.kabza.bags.repository.impl.BagTypesRepositoryImpl;
@@ -19,6 +21,22 @@ public class BagTypesServiceImpl implements BagTypesService {
     @Override
     public Optional<BagType> findBagType(String id) {
         return bagTypesRepository.findBagType(id);
+    }
+
+    @Override
+    public Optional<BagType> fromRecipe(ItemStack[] matrix) {
+        return this.findAll().stream()
+                .filter(BagType::isCraftingEnabled)
+                .filter(bagType -> {
+                    Material[] recipe = bagType.getCraftingRecipe();
+                    for (int i = 0; i < 9 && i < recipe.length; i++) {
+                        if (matrix[i] == null && recipe[i] != null) return false;
+                        if (!matrix[i].getType().equals(recipe[i])) return false;
+                        if (matrix[i].getAmount() != 1) return false;
+                    }
+                    return true;
+                })
+                .findFirst();
     }
 
     @Override

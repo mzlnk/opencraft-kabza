@@ -35,8 +35,21 @@ public class BagsServiceImpl implements BagsService {
     }
 
     @Override
-    public void createOrUpdateBag(Bag bag) {
+    public void updateBag(Bag bag) {
         bagsRepository.createOrUpdateBag(bag);
+    }
+
+    @Override
+    public Bag createNewBag(String bagTypeId) {
+        Bag bag = Bag.newInstance(bagTypeId);
+        bagsRepository.createOrUpdateBag(bag);
+
+        return bag;
+    }
+
+    @Override
+    public void removeBag(UUID uuid) {
+        bagsRepository.removeBag(uuid);
     }
 
     @Override
@@ -57,6 +70,11 @@ public class BagsServiceImpl implements BagsService {
 
         Map<String, NbtTagDto> tags = plugin.nbtSerializer.readNbtTags(itemStack, BAG_NBT_ID);
         return bagsRepository.findBag(UUID.fromString(tags.get("uuid").getTagString()));
+    }
+
+    @Override
+    public void reload() {
+        bagsRepository.reload();
     }
 
 }

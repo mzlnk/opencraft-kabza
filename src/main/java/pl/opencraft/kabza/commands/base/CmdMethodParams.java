@@ -17,6 +17,8 @@ public class CmdMethodParams {
 
     public ItemStack item;
 
+    public String bagTypeId;
+
     public CmdMethodParams(CommandSender sender) {
         this.sender = sender;
         if(sender instanceof Player) {

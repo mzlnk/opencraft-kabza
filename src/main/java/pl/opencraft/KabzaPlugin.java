@@ -1,11 +1,13 @@
 package pl.opencraft;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.opencraft.kabza.bags.service.BagTypesService;
 import pl.opencraft.kabza.bags.service.BagsService;
 import pl.opencraft.kabza.bags.service.impl.BagTypesServiceImpl;
 import pl.opencraft.kabza.bags.service.impl.BagsServiceImpl;
 import pl.opencraft.kabza.commands.executor.KabzaCommandExecutor;
+import pl.opencraft.kabza.listeners.CraftBagListener;
 import pl.opencraft.kabza.nbtserializer.NbtSerializer;
 import pl.opencraft.kabza.nbtserializer.NbtSerializerImpl;
 import pl.opencraft.kabza.utils.FileUtil;
@@ -42,6 +44,7 @@ public class KabzaPlugin extends JavaPlugin {
         bagTypesService = new BagTypesServiceImpl();
 
         registerCommands();
+        registerListeners();
     }
 
     @Override
@@ -51,6 +54,11 @@ public class KabzaPlugin extends JavaPlugin {
 
     private void registerCommands() {
         this.getCommand("kabza").setExecutor(new KabzaCommandExecutor());
+    }
+
+    private void registerListeners() {
+        PluginManager pluginManager = this.getServer().getPluginManager();
+        pluginManager.registerEvents(new CraftBagListener(), this);
     }
 
 }

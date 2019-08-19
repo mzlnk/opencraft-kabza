@@ -1,0 +1,10 @@
+name: Kabza
+main: pl.opencraft.KabzaPlugin
+api-version: 1.14
+version: 1.0
+description: Kabza Plugin
+
+commands:
+  kabza:
+    description: Kabza admin commands
+    usage: /<command>

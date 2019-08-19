@@ -15,4 +15,8 @@ public class BagItem {
     private Material type;
     private int amount;
 
+    public void add(int amount) {
+        this.amount += amount;
+    }
+
 }

@@ -43,18 +43,30 @@ public class BagTypesRepositoryImpl implements BagTypesRepository {
         plugin.fileUtil.listFiles(FileUtil.Directory.BAG_TYPES).stream().forEach(file -> {
             YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
+            String bagTypeId = config.getString("bag_type_id", file.getName().substring(0, file.getName().length() - 5));
+            String bagName = config.getString("bag_name", "Kabza");
+            List<String> bagDescription = config.getStringList("bag_description");
+            Material bagItemType = Material.getMaterial(config.getString("bag_item_type", "CHEST"));
+            boolean craftingEnabled = config.getBoolean("crafting_enabled", false);
+            Material[] craftingRecipe = config.getStringList("crafting_recipe").stream()
+                    .map(Material::getMaterial).toArray(Material[]::new);
+            List<Material> allowedItems = config.getStringList("allowed_items").stream()
+                    .map(Material::getMaterial).collect(Collectors.toList());
+
             BagType bagType = BagType.builder()
-                    .bagId(config.getString("bag_id", file.getName().substring(0, file.getName().length() - 5)))
-                    .bagName(config.getString("bag_name", "Kabza"))
-                    .bagDescription(config.getStringList("bag_description"))
-                    .bagItemType(Material.getMaterial(config.getString("bag_item_type", "CHEST")))
-                    .craftingEnabled(config.getBoolean("crafting_enabled", false))
-                    .craftingRecipe((Material[]) config.getStringList("crafting_recipe").toArray())
-                    .allowedItems(config.getStringList("allowed_items").stream().map(Material::getMaterial).collect(Collectors.toList()))
+                    .bagTypeId(bagTypeId)
+                    .bagName(bagName)
+                    .bagDescription(bagDescription)
+                    .bagItemType(bagItemType)
+                    .craftingEnabled(craftingEnabled)
+                    .craftingRecipe(craftingRecipe)
+                    .allowedItems(allowedItems)
                     .build();
 
-            bagTypes.put(bagType.getBagId(), bagType);
+            bagTypes.put(bagType.getBagTypeId(), bagType);
         });
+
+        plugin.getLogger().info("Loaded: " + bagTypes.size() + " bagTypes");
     }
 
 }

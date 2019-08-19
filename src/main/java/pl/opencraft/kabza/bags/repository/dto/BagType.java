@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 public class BagType {
 
-    private String bagId;
+    private String bagTypeId;
     private String bagName;
     private List<String> bagDescription;
     private Material bagItemType;

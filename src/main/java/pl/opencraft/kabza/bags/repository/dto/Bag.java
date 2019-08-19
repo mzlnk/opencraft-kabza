@@ -1,10 +1,11 @@
 package pl.opencraft.kabza.bags.repository.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import pl.opencraft.kabza.bags.exception.BagTypeNotFoundException;
+import pl.opencraft.kabza.bags.utils.BagUtil;
 import pl.opencraft.kabza.nbtserializer.dto.NbtTagDto;
 import pl.opencraft.kabza.nbtserializer.dto.NbtTagType;
 
@@ -19,13 +20,41 @@ import static pl.opencraft.KabzaPlugin.plugin;
  */
 
 @Data
-@AllArgsConstructor
 public class Bag {
+
+    public static Bag newInstance(String bagTypeId) {
+        Bag bag = new Bag();
+
+        bag.uuid = UUID.randomUUID();
+        bag.opened = false;
+        bag.bagTypeId = bagTypeId;
+        bag.content = new ArrayList<>();
+
+        return bag;
+    }
+
+    private Bag() {
+    }
 
     private UUID uuid;
     private boolean opened;
     private String bagTypeId;
     private List<BagItem> content;
+
+    public void addItem(Material type) {
+        BagItem bagItem = null;
+        for(BagItem i : content) {
+            if(bagItem.getType().equals(type)) {
+                bagItem = i;
+                break;
+            }
+        }
+        if(bagItem == null) {
+            content.add(new BagItem(type, 1));
+        } else {
+            bagItem.add(1);
+        }
+    }
 
     public ItemStack toItemStack() {
         BagType bagType = plugin.bagTypesService.findBagType(bagTypeId)
@@ -41,8 +70,11 @@ public class Bag {
             lore.add(translateAlternateColorCodes('&', s));
         }
         lore.add("");
-        lore.add(GRAY + "Zajete sloty: " + WHITE + ""); // todo: code here
-        lore.add(GRAY + "Zapelnienie: " + WHITE + ""); // todo: code here
+
+        BagUtil bagUtil = new BagUtil(this);
+        lore.add(GRAY + "Zajete sloty: " + WHITE + bagUtil.getOccupiedSlots() + "/27");
+        lore.add(GRAY + "Zapelnienie: " + WHITE + bagUtil.getPercentageCapacity() + "%");
+        lore.add("");
 
         itemMeta.setLore(lore);
 

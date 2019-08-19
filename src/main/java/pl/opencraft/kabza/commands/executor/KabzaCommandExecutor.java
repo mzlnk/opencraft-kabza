@@ -4,7 +4,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import pl.opencraft.kabza.commands.base.CmdNode;
 import pl.opencraft.kabza.commands.base.CmdRoot;
+import pl.opencraft.kabza.commands.methods.GiveBag;
+import pl.opencraft.kabza.commands.methods.Reload;
 
 import java.util.List;
 
@@ -14,7 +17,14 @@ import java.util.List;
 
 public class KabzaCommandExecutor implements CommandExecutor, TabCompleter {
 
-    private CmdRoot kabza = null; // todo: code here
+    private CmdRoot kabza = new CmdRoot("kabza").subCmds(
+            new CmdNode("give").subCmds(
+                    new CmdNode("bag").subCmds(
+                            new CmdNode("<bag_type_id>").setMethod(new GiveBag())
+                    )
+            ),
+            new CmdNode("reload").setMethod(new Reload())
+    );
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

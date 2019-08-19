@@ -1,10 +1,14 @@
 package pl.opencraft.kabza.commands.base;
 
+import pl.opencraft.kabza.bags.repository.dto.BagType;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.bukkit.ChatColor.*;
 import static pl.opencraft.KabzaPlugin.PREFIX;
+import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.kabza.commands.utils.ArgsUtil.restArgs;
 
 /**
@@ -52,6 +56,11 @@ public class CmdNode {
         }
         if (args.length == 1) {
             for (CmdNode child : children) {
+                if(child.token.equals("<bag_type_id>")) {
+                    prompts.addAll(this.getBagTypeIdsList(args[0]));
+                    continue;
+                }
+
                 String prefix = (args[0] == null ? "" : args[0].toLowerCase());
                 if (child.token.toLowerCase().startsWith(prefix)) {
                     prompts.add(child.token);
@@ -63,6 +72,11 @@ public class CmdNode {
 
     public void executeCommand(CmdMethodParams params, String label, String[] args) {
         cmd = cmd + token + ' ';
+
+        if(token.equals("<bag_type_id>")) {
+            params.setBagTypeId(label);
+        }
+
         cmdMethod.executeCommand(params);
         if (args.length > 0) {
             for (CmdNode child : children) {
@@ -97,6 +111,15 @@ public class CmdNode {
             sb.append('\n').append(GREEN).append("Dostepne autouzupelnianie klawiszem TAB!");
             params.sender.sendMessage(sb.toString());
         }
+    }
+
+    private List<String> getBagTypeIdsList(String arg) {
+        String prefix = (arg == null ? "" : arg.toLowerCase());
+        return plugin.bagTypesService.findAll().stream()
+                .map(BagType::getBagTypeId)
+                .filter(n -> n.toLowerCase().contains(prefix))
+                .sorted()
+                .collect(Collectors.toList());
     }
 
 }
