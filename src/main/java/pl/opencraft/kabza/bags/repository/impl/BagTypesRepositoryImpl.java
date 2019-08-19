@@ -48,10 +48,17 @@ public class BagTypesRepositoryImpl implements BagTypesRepository {
             List<String> bagDescription = config.getStringList("bag_description");
             Material bagItemType = Material.getMaterial(config.getString("bag_item_type", "CHEST"));
             boolean craftingEnabled = config.getBoolean("crafting_enabled", false);
-            Material[] craftingRecipe = config.getStringList("crafting_recipe").stream()
-                    .map(Material::getMaterial).toArray(Material[]::new);
             List<Material> allowedItems = config.getStringList("allowed_items").stream()
                     .map(Material::getMaterial).collect(Collectors.toList());
+
+            Material[] craftingRecipe = new Material[9];
+            for(int i = 0; i < 9; i++) {
+                craftingRecipe[i] = null;
+            }
+            int i = 0;
+            for(String s : config.getStringList("crafting_recipe")) {
+                craftingRecipe[i++] = Material.getMaterial(s);
+            }
 
             BagType bagType = BagType.builder()
                     .bagTypeId(bagTypeId)

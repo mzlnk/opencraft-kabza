@@ -7,6 +7,7 @@ import pl.opencraft.kabza.bags.service.BagsService;
 import pl.opencraft.kabza.bags.service.impl.BagTypesServiceImpl;
 import pl.opencraft.kabza.bags.service.impl.BagsServiceImpl;
 import pl.opencraft.kabza.commands.executor.KabzaCommandExecutor;
+import pl.opencraft.kabza.listeners.CollectItemListener;
 import pl.opencraft.kabza.listeners.CraftBagListener;
 import pl.opencraft.kabza.nbtserializer.NbtSerializer;
 import pl.opencraft.kabza.nbtserializer.NbtSerializerImpl;
@@ -59,6 +60,7 @@ public class KabzaPlugin extends JavaPlugin {
     private void registerListeners() {
         PluginManager pluginManager = this.getServer().getPluginManager();
         pluginManager.registerEvents(new CraftBagListener(), this);
+        pluginManager.registerEvents(new CollectItemListener(), this);
     }
 
 }
