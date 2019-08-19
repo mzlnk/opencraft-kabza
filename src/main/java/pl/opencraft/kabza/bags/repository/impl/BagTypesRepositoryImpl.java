@@ -57,6 +57,7 @@ public class BagTypesRepositoryImpl implements BagTypesRepository {
             }
             int i = 0;
             for(String s : config.getStringList("crafting_recipe")) {
+                plugin.getLogger().info("[R] [" + i + "] = " + s);
                 craftingRecipe[i++] = Material.getMaterial(s);
             }
 

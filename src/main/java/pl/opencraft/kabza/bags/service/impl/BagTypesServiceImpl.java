@@ -30,8 +30,9 @@ public class BagTypesServiceImpl implements BagTypesService {
                 .filter(bagType -> {
                     Material[] recipe = bagType.getCraftingRecipe();
                     for (int i = 0; i < 9; i++) {
+                        if (matrix[i] == null && recipe[i] == null) continue;
+                        if (matrix[i] == null && recipe[i].equals(Material.AIR)) continue;
                         if (matrix[i] == null && recipe[i] != null) return false;
-                        if(matrix[i] == null && recipe[i] == null) continue;
                         if (!matrix[i].getType().equals(recipe[i])) return false;
                         if (matrix[i].getAmount() != 1) return false;
                     }

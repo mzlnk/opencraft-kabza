@@ -68,28 +68,36 @@ public class Bag {
     }
 
     public double getPercentageCapacity() {
-        double availableSlotsCapacity = (MAX_BAG_SLOTS - this.getOccupiedSlots()) / MAX_BAG_SLOTS;
+        double occupiedSlots = this.getOccupiedSlots();
+        double slotFactor = occupiedSlots / MAX_BAG_SLOTS;
 
-        double restCapacity = content.stream()
-                .mapToDouble(item -> {
+        int itemsInOccupiedSlots = content.stream()
+                .mapToInt(BagItem::getAmount)
+                .sum();
+
+        int maxItemsInOccupiedSlots = content.stream()
+                .mapToInt(item -> {
                     int maxStackSize = item.getType().getMaxStackSize();
-                    double occupiedSlots = (double) item.getAmount() / (double) maxStackSize;
-                    double restSlot = occupiedSlots - Math.floor(occupiedSlots);
+                    int slots = (int) Math.ceil((double) item.getAmount() / (double) maxStackSize);
 
-                    return (1.0D - restSlot) * ONE_SLOT_OCCUPY_PERCENTAGE;
+                    return slots * maxStackSize;
                 })
                 .sum();
 
-        return Math.round((1.0D - availableSlotsCapacity - restCapacity) * 10000.0D) / 100.0D;
+        return Math.round(((double) itemsInOccupiedSlots / (double) maxItemsInOccupiedSlots * slotFactor) * 10000.0D) / 100.0D;
     }
 
     public int getMaxItemAmountToAdd(Material type) {
-        int amount = 0;
+        int availableSlots = ((int) MAX_BAG_SLOTS - this.getOccupiedSlots());
 
-        amount += (Math.max(MAX_BAG_SLOTS - this.getOccupiedSlots(), 0) * type.getMaxStackSize());
-        amount += type.getMaxStackSize() - (this.getItemAmount(type) % type.getMaxStackSize());
+        int maxItemsInAvailableSlots = (Math.max(availableSlots, 0) * type.getMaxStackSize());
+        int maxItemsInLastSlot = (type.getMaxStackSize() - (this.getItemAmount(type) % type.getMaxStackSize()));
 
-        return amount;
+        if (maxItemsInLastSlot == type.getMaxStackSize()) {
+            maxItemsInLastSlot = 0;
+        }
+
+        return (maxItemsInAvailableSlots + maxItemsInLastSlot);
     }
 
     public boolean isApplicableItem(Material type) {

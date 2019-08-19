@@ -80,7 +80,7 @@
         <dependency>
             <groupId>pl.opencraft</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.14.3</version>
+            <version>1.14.4</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
