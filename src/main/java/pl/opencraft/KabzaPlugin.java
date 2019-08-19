@@ -2,6 +2,7 @@ package pl.opencraft;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.opencraft.kabza.KabzaApi;
 import pl.opencraft.kabza.bags.service.BagTypesService;
 import pl.opencraft.kabza.bags.service.BagsService;
 import pl.opencraft.kabza.bags.service.impl.BagTypesServiceImpl;
@@ -20,7 +21,7 @@ import static org.bukkit.ChatColor.*;
  * Created by Marcin Zielonka on 14/08/2019.
  */
 
-public class KabzaPlugin extends JavaPlugin {
+public class KabzaPlugin extends JavaPlugin implements KabzaApi {
 
     public static final String BAG_NBT_ID = "KabzaBag";
     public static final String PREFIX = BLUE + "[Kabza]" + RESET;
@@ -52,6 +53,16 @@ public class KabzaPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
 
+    }
+
+    @Override
+    public BagsService getBagsService() {
+        return bagsService;
+    }
+
+    @Override
+    public BagTypesService getBagTypesService() {
+        return bagTypesService;
     }
 
     private void registerCommands() {
