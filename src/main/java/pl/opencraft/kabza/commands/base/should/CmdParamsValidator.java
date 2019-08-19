@@ -26,6 +26,11 @@ public abstract class CmdParamsValidator {
         throw new IllegalArgumentException(failMessage);
     }
 
+    public static PlayerHasAdminPermission playerHasAdminPermission = new PlayerHasAdminPermission();
+    public static PlayerHasBagInHand playerHasBagInHand = new PlayerHasBagInHand();
+    public static PlayerHasNoItemInHand playerHasNoItemInHand = new PlayerHasNoItemInHand();
+    public static BagTypeExists bagTypeExists = new BagTypeExists();
+
     abstract boolean areParamsValid(CmdMethodParams params);
     abstract String failMessage();
 

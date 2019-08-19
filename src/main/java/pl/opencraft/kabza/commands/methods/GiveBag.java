@@ -6,6 +6,7 @@ import pl.opencraft.kabza.commands.base.CmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
 
 import static pl.opencraft.KabzaPlugin.plugin;
+import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
 
 /**
  * Created by Marcin Zielonka on 15/08/2019.
@@ -21,8 +22,10 @@ public class GiveBag implements CmdMethod, CmdDescription {
 
     @Override
     public void executeCommand(CmdMethodParams params) {
-        Bag bag = plugin.bagsService.createNewBag(params.bagTypeId);
+        should(playerHasAdminPermission, params);
+        should(playerHasNoItemInHand, params);
 
+        Bag bag = plugin.bagsService.createNewBag(params.bagTypeId);
         params.player.getInventory().setItemInMainHand(bag.toItemStack());
     }
 }

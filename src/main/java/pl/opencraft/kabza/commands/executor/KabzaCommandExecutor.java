@@ -7,6 +7,8 @@ import org.bukkit.command.TabCompleter;
 import pl.opencraft.kabza.commands.base.CmdNode;
 import pl.opencraft.kabza.commands.base.CmdRoot;
 import pl.opencraft.kabza.commands.methods.GiveBag;
+import pl.opencraft.kabza.commands.methods.InspectBag;
+import pl.opencraft.kabza.commands.methods.InspectBagType;
 import pl.opencraft.kabza.commands.methods.Reload;
 
 import java.util.List;
@@ -22,6 +24,12 @@ public class KabzaCommandExecutor implements CommandExecutor, TabCompleter {
                     new CmdNode("bag").subCmds(
                             new CmdNode("<bag_type_id>").setMethod(new GiveBag())
                     )
+            ),
+            new CmdNode("inspect").subCmds(
+                    new CmdNode("bagtype").subCmds(
+                            new CmdNode("<bag_type_id>").setMethod(new InspectBagType())
+                    ),
+                    new CmdNode("bag").setMethod(new InspectBag())
             ),
             new CmdNode("reload").setMethod(new Reload())
     );
