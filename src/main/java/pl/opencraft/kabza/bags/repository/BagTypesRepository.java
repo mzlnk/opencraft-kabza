@@ -13,6 +13,8 @@ public interface BagTypesRepository {
 
     Optional<BagType> findBagType(String id);
     List<BagType> findAll();
+    void createOrUpdateBagType(BagType bagType);
+    void removeBagType(String id);
     void reload();
 
 }

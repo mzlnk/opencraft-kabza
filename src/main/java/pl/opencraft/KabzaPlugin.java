@@ -8,6 +8,7 @@ import pl.opencraft.kabza.bags.service.BagsService;
 import pl.opencraft.kabza.bags.service.impl.BagTypesServiceImpl;
 import pl.opencraft.kabza.bags.service.impl.BagsServiceImpl;
 import pl.opencraft.kabza.commands.executor.KabzaCommandExecutor;
+import pl.opencraft.kabza.gui.inventories.service.BagTypeEditorGuiInventoryService;
 import pl.opencraft.kabza.listeners.CollectItemListener;
 import pl.opencraft.kabza.listeners.CraftBagListener;
 import pl.opencraft.kabza.listeners.OpenBagListener;
@@ -23,7 +24,10 @@ import static org.bukkit.ChatColor.*;
 
 public class KabzaPlugin extends JavaPlugin implements KabzaApi {
 
-    public static final String BAG_NBT_ID = "KabzaBag";
+    public static final String PLUGIN_NBT_KEY_ID = "KabzaPlugin";
+    public static final String BAG_NBT_IDENTITY = "KabzaBag";
+    public static final String BAG_TYPE_EDITOR_GUI_ITEM_IDENTITY = "BagTypeEditorGuiItem";
+
     public static final String PREFIX = BLUE + "[Kabza]" + RESET;
 
     public static KabzaPlugin plugin;
@@ -33,6 +37,8 @@ public class KabzaPlugin extends JavaPlugin implements KabzaApi {
 
     public BagsService bagsService;
     public BagTypesService bagTypesService;
+
+    public BagTypeEditorGuiInventoryService bagTypeEditorGuiInventoryService;
 
     public KabzaPlugin() {
         plugin = this;

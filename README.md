@@ -65,9 +65,28 @@ crafting_recipe:
   - YELLOW_WOOL
   - YELLOW_WOOL
   - YELLOW_WOOL
-allowed_items:
+
+all_item_types_allowed: false
+all_item_names_allowed: false
+all_item_lores_allowed: false
+
+# fill if all_item_types_allowed == false:
+allowed_item_types:
   - YELLOW_WOOL
   - YELLOW_DYE
+
+# fill if all_item_names_allowed == false:
+allowed_item_names:
+  - '&2name1'
+  - '&6name2'
+
+# fill if all_item_lores_allowed == false:
+allowed_item_lores:
+  lore-1:
+    - 'Lore Line 1'
+    - 'Lore Line 2'
+  lore-2:
+    - 'Lore Line 1'
 ```
 
 -----------------------

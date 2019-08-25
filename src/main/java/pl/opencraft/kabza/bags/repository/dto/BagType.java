@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import org.bukkit.Material;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,16 +12,18 @@ import java.util.List;
 
 @Getter
 @Builder
-public class BagType {
+public class BagType implements Identifiable {
 
-    private String bagTypeId;
+    private String id;
     private String bagName;
     private List<String> bagDescription;
     private Material bagItemType;
     private boolean craftingEnabled;
     private Material[] craftingRecipe;
 
-    @Builder.Default
-    private List<Material> allowedItems = new ArrayList<>();
+    private boolean allItemsAllowed;
+
+    private List<BagTypeItem> allowedItems;
+
 
 }

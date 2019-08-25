@@ -63,10 +63,14 @@ public class OpenBagListener implements Listener {
                 int restAmount = bagItem.getAmount() % itemMaxStackSize;
 
                 for(int i = 0; i < fullItemSlots; i++) {
-                    chest.getBlockInventory().setItem(slotIdx++, new ItemStack(bagItem.getType(), itemMaxStackSize));
+                    ItemStack itemStack = bagItem.toItemStack().orElse(new ItemStack(Material.AIR));
+                    itemStack.setAmount(itemMaxStackSize);
+                    chest.getBlockInventory().setItem(slotIdx++, itemStack);
                 }
                 if(restAmount > 0) {
-                    chest.getBlockInventory().setItem(slotIdx++, new ItemStack(bagItem.getType(), restAmount));
+                    ItemStack itemStack = bagItem.toItemStack().orElse(new ItemStack(Material.AIR));
+                    itemStack.setAmount(restAmount);
+                    chest.getBlockInventory().setItem(slotIdx++, itemStack);
                 }
             }
 

@@ -37,7 +37,7 @@ public class CraftBagListener implements Listener {
         }
 
         plugin.bagTypesService.fromRecipe(event.getInventory().getMatrix()).ifPresent(bagType -> {
-            Bag bag = plugin.bagsService.createNewBag(bagType.getBagTypeId());
+            Bag bag = plugin.bagsService.createNewBag(bagType.getId());
             event.getInventory().setResult(bag.toItemStack());
             preCraftedBags.put(event.getViewers().get(0).getUniqueId(), bag.getUuid());
         });

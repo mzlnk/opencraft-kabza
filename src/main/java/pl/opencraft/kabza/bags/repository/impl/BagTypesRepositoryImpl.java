@@ -1,13 +1,14 @@
 package pl.opencraft.kabza.bags.repository.impl;
 
-import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import pl.opencraft.kabza.bags.repository.BagTypesRepository;
 import pl.opencraft.kabza.bags.repository.dto.BagType;
 import pl.opencraft.kabza.utils.FileUtil;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static pl.opencraft.KabzaPlugin.plugin;
 
@@ -34,6 +35,18 @@ public class BagTypesRepositoryImpl implements BagTypesRepository {
     }
 
     @Override
+    public void createOrUpdateBagType(BagType bagType) {
+        bagTypes.put(bagType.getId(), bagType);
+        this.saveBagType(bagType);
+    }
+
+    @Override
+    public void removeBagType(String id) {
+        bagTypes.remove(id);
+        plugin.fileUtil.removeFile(FileUtil.Directory.BAG_TYPES, id + ".json");
+    }
+
+    @Override
     public void reload() {
         bagTypes.clear();
         this.loadBagTypes();
@@ -41,39 +54,21 @@ public class BagTypesRepositoryImpl implements BagTypesRepository {
 
     private void loadBagTypes() {
         plugin.fileUtil.listFiles(FileUtil.Directory.BAG_TYPES).stream().forEach(file -> {
-            YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-
-            String bagTypeId = config.getString("bag_type_id", file.getName().substring(0, file.getName().length() - 5));
-            String bagName = config.getString("bag_name", "Kabza");
-            List<String> bagDescription = config.getStringList("bag_description");
-            Material bagItemType = Material.getMaterial(config.getString("bag_item_type", "CHEST"));
-            boolean craftingEnabled = config.getBoolean("crafting_enabled", false);
-            List<Material> allowedItems = config.getStringList("allowed_items").stream()
-                    .map(Material::getMaterial).collect(Collectors.toList());
-
-            Material[] craftingRecipe = new Material[9];
-            for(int i = 0; i < 9; i++) {
-                craftingRecipe[i] = null;
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                BagType bagType = new Gson().fromJson(br, BagType.class);
+                bagTypes.put(bagType.getId(), bagType);
+            } catch (Exception e) {
+                plugin.getLogger().warning("Could not read file: " + file.getName());
             }
-            int i = 0;
-            for(String s : config.getStringList("crafting_recipe")) {
-                craftingRecipe[i++] = Material.getMaterial(s);
-            }
-
-            BagType bagType = BagType.builder()
-                    .bagTypeId(bagTypeId)
-                    .bagName(bagName)
-                    .bagDescription(bagDescription)
-                    .bagItemType(bagItemType)
-                    .craftingEnabled(craftingEnabled)
-                    .craftingRecipe(craftingRecipe)
-                    .allowedItems(allowedItems)
-                    .build();
-
-            bagTypes.put(bagType.getBagTypeId(), bagType);
         });
 
         plugin.getLogger().info("Loaded: " + bagTypes.size() + " bagTypes");
+    }
+
+    private void saveBagType(BagType bagType) {
+        String filename = bagType.getId() + ".json";
+        String content = new GsonBuilder().setPrettyPrinting().create().toJson(bagType);
+        plugin.fileUtil.createOrUpdateFile(FileUtil.Directory.BAG_TYPES, filename, content);
     }
 
 }

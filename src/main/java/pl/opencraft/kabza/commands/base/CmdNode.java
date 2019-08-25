@@ -116,7 +116,7 @@ public class CmdNode {
     private List<String> getBagTypeIdsList(String arg) {
         String prefix = (arg == null ? "" : arg.toLowerCase());
         return plugin.bagTypesService.findAll().stream()
-                .map(BagType::getBagTypeId)
+                .map(BagType::getId)
                 .filter(n -> n.toLowerCase().contains(prefix))
                 .sorted()
                 .collect(Collectors.toList());

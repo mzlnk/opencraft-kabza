@@ -13,8 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pl.opencraft.KabzaPlugin.plugin;
-import static pl.opencraft.KabzaPlugin.BAG_NBT_ID;
+import static pl.opencraft.KabzaPlugin.*;
 
 /**
  * Created by Marcin Zielonka on 14/08/2019.
@@ -55,7 +54,12 @@ public class BagsServiceImpl implements BagsService {
     @Override
     public boolean isBag(ItemStack itemStack) {
         try {
-            plugin.nbtSerializer.readNbtTags(itemStack, BAG_NBT_ID);
+            Map<String, NbtTagDto> tags = plugin.nbtSerializer.readNbtTags(itemStack, PLUGIN_NBT_KEY_ID);
+            NbtTagDto identityTag = tags.get("Indentity");
+
+            if(identityTag == null || identityTag.getTagString().equals(BAG_NBT_IDENTITY)) {
+                return false;
+            }
         } catch (NbtSerializationException e) {
             return false;
         }
@@ -68,8 +72,8 @@ public class BagsServiceImpl implements BagsService {
             return Optional.empty();
         }
 
-        Map<String, NbtTagDto> tags = plugin.nbtSerializer.readNbtTags(itemStack, BAG_NBT_ID);
-        return bagsRepository.findBag(UUID.fromString(tags.get("uuid").getTagString()));
+        Map<String, NbtTagDto> tags = plugin.nbtSerializer.readNbtTags(itemStack, PLUGIN_NBT_KEY_ID);
+        return bagsRepository.findBag(UUID.fromString(tags.get("Uuid").getTagString()));
     }
 
     @Override

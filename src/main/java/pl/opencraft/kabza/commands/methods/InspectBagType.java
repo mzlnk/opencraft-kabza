@@ -26,7 +26,7 @@ public class InspectBagType implements CmdMethod, CmdDescription {
             StringBuilder sb = new StringBuilder();
 
             sb.append(BLUE).append(BOLD).append("BagType info:").append("\n")
-                    .append(GRAY).append("bag_type_id: ").append(WHITE).append(bagType.getBagTypeId()).append("\n")
+                    .append(GRAY).append("bag_type_id: ").append(WHITE).append(bagType.getId()).append("\n")
                     .append(GRAY).append("bag_name: ").append(WHITE).append(ChatColor.translateAlternateColorCodes('&', bagType.getBagName())).append("\n")
                     .append(GRAY).append("bag_description:").append("\n");
 
@@ -42,8 +42,8 @@ public class InspectBagType implements CmdMethod, CmdDescription {
                 sb.append(WHITE).append("- ").append(i++).append(": ").append((m != null ? (m.name().substring(0, 1).toUpperCase() + m.name().substring(1).toLowerCase()) : "null")).append("\n");
             }
 
-            sb.append(GRAY).append("allowed_items:").append("\n");
-            for(Material type : bagType.getAllowedItems()) {
+            sb.append(GRAY).append("allowed_item_types:").append("\n");
+            for(Material type : bagType.getAllowedItemTypes()) {
                 sb.append(WHITE).append("- ").append(type.name().substring(0, 1).toUpperCase()).append(type.name().substring(1).toLowerCase()).append("\n");
             }
 

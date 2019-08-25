@@ -11,8 +11,7 @@ import pl.opencraft.kabza.nbtserializer.dto.NbtTagType;
 import java.util.*;
 
 import static org.bukkit.ChatColor.*;
-import static pl.opencraft.KabzaPlugin.BAG_NBT_ID;
-import static pl.opencraft.KabzaPlugin.plugin;
+import static pl.opencraft.KabzaPlugin.*;
 
 /**
  * Created by Marcin Zielonka on 14/08/2019.
@@ -43,22 +42,26 @@ public class Bag {
     private String bagTypeId;
     private List<BagItem> content;
 
-    private boolean containsItem(Material type) {
+    private boolean containsItem(ItemStack itemStack) {
         return content.stream()
-                .map(BagItem::getType)
-                .anyMatch(t -> t.equals(type));
+                .map(BagItem::toItemStack)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .anyMatch(is -> is.isSimilar(itemStack));
     }
 
-    private int getItemAmount(Material type) {
-        if (!this.containsItem(type)) {
+    private int getItemAmount(ItemStack itemStack) {
+        if (!this.containsItem(itemStack)) {
             return 0;
         }
-        for (BagItem item : content) {
-            if (item.getType().equals(type)) {
-                return item.getAmount();
-            }
-        }
-        return 0;
+        return content.stream()
+                .map(BagItem::toItemStack)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .filter(is -> is.isSimilar(itemStack))
+                .findFirst()
+                .map(ItemStack::getAmount)
+                .orElse(0);
     }
 
     public int getOccupiedSlots() {
@@ -87,11 +90,12 @@ public class Bag {
         return Math.round(((double) itemsInOccupiedSlots / (double) maxItemsInOccupiedSlots * slotFactor) * 10000.0D) / 100.0D;
     }
 
-    public int getMaxItemAmountToAdd(Material type) {
+    public int getMaxItemAmountToAdd(ItemStack itemStack) {
+        Material type = itemStack.getType();
         int availableSlots = ((int) MAX_BAG_SLOTS - this.getOccupiedSlots());
 
         int maxItemsInAvailableSlots = (Math.max(availableSlots, 0) * type.getMaxStackSize());
-        int maxItemsInLastSlot = (type.getMaxStackSize() - (this.getItemAmount(type) % type.getMaxStackSize()));
+        int maxItemsInLastSlot = (type.getMaxStackSize() - (this.getItemAmount(itemStack) % type.getMaxStackSize()));
 
         if (maxItemsInLastSlot == type.getMaxStackSize()) {
             maxItemsInLastSlot = 0;
@@ -100,23 +104,36 @@ public class Bag {
         return (maxItemsInAvailableSlots + maxItemsInLastSlot);
     }
 
-    public boolean isApplicableItem(Material type) {
-        List<Material> applicableItems = plugin.bagTypesService.findBagType(bagTypeId)
-                .map(BagType::getAllowedItems).orElse(new ArrayList<>());
+    public boolean isItemApplicable(ItemStack itemStack) {
+        BagType bagType = plugin.bagTypesService.findBagType(bagTypeId).orElse(null);
+        if (bagType == null) {
+            plugin.getLogger().info("[BC] bagType is null");
+            return false;
+        }
 
-        return applicableItems.contains(type);
+        for(BagTypeItem bagTypeItem : bagType.getAllowedItems()) {
+            if(!bagTypeItem.isItemApplicable(itemStack)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
-    public void addItem(Material type, int amount) {
+    public void addItem(ItemStack itemStack, int amount) {
         BagItem bagItem = null;
         for (BagItem i : content) {
-            if (i.getType().equals(type)) {
+            boolean result = i.toItemStack()
+                    .map(is -> is.isSimilar(itemStack))
+                    .orElse(false);
+
+            if (result) {
                 bagItem = i;
                 break;
             }
         }
         if (bagItem == null) {
-            content.add(new BagItem(type, amount));
+            content.add(BagItem.fromItemStack(itemStack, amount));
         } else {
             bagItem.add(amount);
         }
@@ -147,8 +164,9 @@ public class Bag {
         item.setItemMeta(itemMeta);
 
         Map<String, NbtTagDto> tags = new HashMap<>();
-        tags.put("uuid", new NbtTagDto(NbtTagType.STRING).withTagStringValue(uuid.toString()));
-        item = plugin.nbtSerializer.createOrUpdateNbtTags(item, BAG_NBT_ID, tags);
+        tags.put("Identity", new NbtTagDto(NbtTagType.STRING).withTagStringValue(BAG_NBT_IDENTITY));
+        tags.put("Uuid", new NbtTagDto(NbtTagType.STRING).withTagStringValue(uuid.toString()));
+        item = plugin.nbtSerializer.createOrUpdateNbtTags(item, PLUGIN_NBT_KEY_ID, tags);
 
         return item;
     }
