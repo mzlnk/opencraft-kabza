@@ -38,55 +38,75 @@ Każdy stworzony worek jest reprezentowany przez plik `*.json` w folderze `/bags
 -----------------------
 ###Typy worków
 
-Każdy typ worka reprezentowany jest przez plik `*.yml` w folderze `/bagtypes`. Przykładowa struktura pliku:
+Każdy typ worka reprezentowany jest przez plik `*.json` w folderze `/bagtypes`. Przykładowa struktura pliku:
 
-* `bag_type_id` - identyfikator typu worka
-* `bag_name` - nazwa worka
-* `bag_description` - opis worka, który pojawi się w Lore przedmiotu
-* `bag_item_type` - typ przedmiotu, który będzie reprezentować worek
-* `crafting_enabled` - czy ma być możliwość craftingu worka
-* `crafting_recipe` - crafting worka (_kolejność przedmiotów w liście ma znaczenie!_)
-* `allowed_items` - przedmioty, które mają być zbierane do worka
+* `id` - identyfikator typu worka
+* `bagName` - nazwa worka
+* `bagDescription` - opis worka, który pojawi się w Lore przedmiotu
+* `bagItemType` - typ przedmiotu, który będzie reprezentować worek
+* `craftingEnabled` - flaga określająca, czy ma być możliwość craftingu worka
+* `craftingRecipe` - crafting worka (_kolejność przedmiotów w liście ma znaczenie!_)
+* `allowedItemAllowed` - flaga określająca, czy worek ma przyjmować wszystkie przedmioty
+* `allowedItems` - przedmioty, które mają być zbierane do worka
+* `type` - rodzaj przedmiotu (klasa `Material`)
+* `allNamesAllowed` - flaga określająca, czy mają być dopuszczalne przedmioty z dowolną nazwą
+* `allLoresAllowed` - flaga określająca, czy mają być dopuszczalne przedmioty z dowolnym Lore
+* `noNameAllowed` - flaga określająca, czy ma być dopuszczony przedmiot bez customowej nazwy (tj. z domyślną nazwą w MC)
+* `noNameAllowed` - flaga określająca, czy ma być dopuszczony przedmiot bez Lore
+* `names` - lista nazw, które są dopuszczalne na przedmiocie
+* `lores` - lista Lore, które są dopuszczalne na przedmiocie
 
-```yaml
-bag_type_id: BAG_TYPE_2
-bag_name: '&e&lWorek Podroznika'
-bag_description:
-  - '&fNa podroz!'
-bag_item_type: YELLOW_SHULKER_BOX
-crafting_enabled: true
-crafting_recipe:
-  - YELLOW_WOOL
-  - YELLOW_WOOL
-  - YELLOW_WOOL
-  - YELLOW_WOOL
-  - AIR
-  - YELLOW_WOOL
-  - YELLOW_WOOL
-  - YELLOW_WOOL
-  - YELLOW_WOOL
 
-all_item_types_allowed: false
-all_item_names_allowed: false
-all_item_lores_allowed: false
-
-# fill if all_item_types_allowed == false:
-allowed_item_types:
-  - YELLOW_WOOL
-  - YELLOW_DYE
-
-# fill if all_item_names_allowed == false:
-allowed_item_names:
-  - '&2name1'
-  - '&6name2'
-
-# fill if all_item_lores_allowed == false:
-allowed_item_lores:
-  lore-1:
-    - 'Lore Line 1'
-    - 'Lore Line 2'
-  lore-2:
-    - 'Lore Line 1'
+```json
+{
+  "id" : "BAG_TYPE_1",
+  "bagName" : "&6Worek",
+  "bagDescription": [
+    "&1Linia opisu 1",
+    "&2Linia opisu 2"
+  ],
+  "bagItemType": "CHEST",
+  "craftingEnabled": true,
+  "craftingRecipe" : [
+    "CHEST",
+    "CHEST",
+    "CHEST",
+    "CHEST",
+    "AIR",
+    "CHEST",
+    "CHEST",
+    "CHEST",
+    "CHEST"
+  ],
+  "allItemsAllowed": false,
+  "allowedItems": [
+    {
+      "type": "APPLE",
+      "allNamesAllowed": false,
+      "allLoresAllowed": false,
+      "noNameAllowed": true,
+      "noLoreAllowed": true,
+      "names": [
+        "Nazwa 1",
+        "&8Nazwa 2 (kolorowa)"
+      ],
+      "lores": [
+        {
+          "lore": [
+            "Linia Lore 1",
+            "&2Linia Lore 2"
+          ]
+        },
+        {
+          "lore": [
+            "Inna Linia Lore 1",
+            "Inna Linia Lore 2"
+          ]
+        }
+      ] 
+    } 
+  ]
+}
 ```
 
 -----------------------
