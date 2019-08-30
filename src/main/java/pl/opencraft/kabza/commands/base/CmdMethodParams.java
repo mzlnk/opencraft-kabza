@@ -1,6 +1,7 @@
 package pl.opencraft.kabza.commands.base;
 
 import lombok.Setter;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +19,17 @@ public class CmdMethodParams {
     public ItemStack item;
 
     public String bagTypeId;
+    public String bagName;
+
+    public int lineNo;
+    public String line;
+    public String name;
+
+    public boolean flag;
+    public int craftingSlot;
+
+    public Material itemType;
+
 
     public CmdMethodParams(CommandSender sender) {
         this.sender = sender;

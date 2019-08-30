@@ -30,6 +30,9 @@ public abstract class CmdParamsValidator {
     public static PlayerHasBagInHand playerHasBagInHand = new PlayerHasBagInHand();
     public static PlayerHasNoItemInHand playerHasNoItemInHand = new PlayerHasNoItemInHand();
     public static BagTypeExists bagTypeExists = new BagTypeExists();
+    public static AllowedItemTypeExists allowedItemTypeExists = new AllowedItemTypeExists();
+    public static ItemTypeExists itemTypeExists = new ItemTypeExists();
+    public static PlayerHasItemInHand playerHasItemInHand = new PlayerHasItemInHand();
 
     abstract boolean areParamsValid(CmdMethodParams params);
     abstract String failMessage();

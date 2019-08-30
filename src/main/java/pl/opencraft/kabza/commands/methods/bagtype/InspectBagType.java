@@ -1,4 +1,4 @@
-package pl.opencraft.kabza.commands.methods;
+package pl.opencraft.kabza.commands.methods.bagtype;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -43,9 +43,9 @@ public class InspectBagType implements CmdMethod, CmdDescription {
             }
 
             sb.append(GRAY).append("allowed_item_types:").append("\n");
-            for(Material type : bagType.getAllowedItemTypes()) {
+            /*for(Material type : bagType.getAllowedItems()) {
                 sb.append(WHITE).append("- ").append(type.name().substring(0, 1).toUpperCase()).append(type.name().substring(1).toLowerCase()).append("\n");
-            }
+            }*/
 
             params.player.sendMessage(sb.toString());
         });

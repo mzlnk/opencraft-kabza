@@ -1,5 +1,7 @@
 package pl.opencraft.kabza.commands.base;
 
+import org.apache.commons.lang.math.NumberUtils;
+import org.bukkit.Material;
 import pl.opencraft.kabza.bags.repository.dto.BagType;
 
 import java.util.ArrayList;
@@ -75,6 +77,21 @@ public class CmdNode {
 
         if(token.equals("<bag_type_id>")) {
             params.setBagTypeId(label);
+        }
+        if(token.equals("<bag_name>")) {
+            params.setBagName(label);
+        }
+        if(token.equals("<item_type>")) {
+            params.equals(Material.getMaterial(label));
+        }
+        if(token.equals("<flag>")) {
+            params.setFlag(Boolean.parseBoolean(label));
+        }
+        if(token.equals("<line_no>")) {
+            params.setLineNo(NumberUtils.toInt(label, 0));
+        }
+        if(token.equals("<line>")) {
+            params.setLine(label);
         }
 
         cmdMethod.executeCommand(params);

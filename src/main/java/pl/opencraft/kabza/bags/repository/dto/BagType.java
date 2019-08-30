@@ -19,6 +19,7 @@ public class BagType implements Identifiable {
     private List<String> bagDescription;
     private Material bagItemType;
     private boolean craftingEnabled;
+    private boolean shapelessCrafting;
     private Material[] craftingRecipe;
 
     private boolean allItemsAllowed;

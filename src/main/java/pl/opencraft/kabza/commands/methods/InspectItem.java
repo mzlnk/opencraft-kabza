@@ -14,6 +14,7 @@ import static pl.opencraft.KabzaPlugin.plugin;
 
 public class InspectItem implements CmdMethod, CmdDescription {
 
+    // util method used only during developing and testing plugin
 
     @Override
     public String description() {
@@ -27,4 +28,5 @@ public class InspectItem implements CmdMethod, CmdDescription {
             params.player.sendMessage(json);
         });
     }
+
 }

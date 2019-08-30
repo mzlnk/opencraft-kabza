@@ -3,10 +3,14 @@ package pl.opencraft.kabza.commands.base.should;
 import org.bukkit.Material;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
 
-import static pl.opencraft.KabzaPlugin.PREFIX;
 import static org.bukkit.ChatColor.RED;
+import static pl.opencraft.KabzaPlugin.PREFIX;
 
-public class PlayerHasNoItemInHand extends CmdParamsValidator {
+/**
+ * Created by Marcin Zielonka on 30/08/2019.
+ */
+
+public class PlayerHasItemInHand extends CmdParamsValidator {
 
     @Override
     boolean areParamsValid(CmdMethodParams params) {
@@ -15,6 +19,7 @@ public class PlayerHasNoItemInHand extends CmdParamsValidator {
 
     @Override
     String failMessage() {
-        return PREFIX + RED + "Nie mozesz trzymac przedmiotu w rece!";
+        return PREFIX + RED + "Musisz trzymac przedmiot w rece!";
     }
+
 }
