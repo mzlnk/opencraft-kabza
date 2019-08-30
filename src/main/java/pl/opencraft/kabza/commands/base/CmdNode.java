@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import pl.opencraft.kabza.bags.repository.dto.BagType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,11 @@ public class CmdNode {
         if (args.length == 1) {
             for (CmdNode child : children) {
                 if(child.token.equals("<bag_type_id>")) {
+                    prompts.addAll(this.getBagTypeIdsList(args[0]));
+                    continue;
+                }
+
+                if(child.token.equals("<item_type>")) {
                     prompts.addAll(this.getBagTypeIdsList(args[0]));
                     continue;
                 }
@@ -134,6 +140,15 @@ public class CmdNode {
         String prefix = (arg == null ? "" : arg.toLowerCase());
         return plugin.bagTypesService.findAll().stream()
                 .map(BagType::getId)
+                .filter(n -> n.toLowerCase().contains(prefix))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    private List<String> getItemList(String arg) {
+        String prefix = (arg == null ? "" : arg.toLowerCase());
+        return Arrays.stream(Material.values())
+                .map(Material::name)
                 .filter(n -> n.toLowerCase().contains(prefix))
                 .sorted()
                 .collect(Collectors.toList());
