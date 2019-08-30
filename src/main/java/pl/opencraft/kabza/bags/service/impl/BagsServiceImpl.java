@@ -55,9 +55,9 @@ public class BagsServiceImpl implements BagsService {
     public boolean isBag(ItemStack itemStack) {
         try {
             Map<String, NbtTagDto> tags = plugin.nbtSerializer.readNbtTags(itemStack, PLUGIN_NBT_KEY_ID);
-            NbtTagDto identityTag = tags.get("Indentity");
+            NbtTagDto identityTag = tags.get("Identity");
 
-            if(identityTag == null || identityTag.getTagString().equals(BAG_NBT_IDENTITY)) {
+            if(identityTag == null || !identityTag.getTagString().equals(BAG_NBT_IDENTITY)) {
                 return false;
             }
         } catch (NbtSerializationException e) {

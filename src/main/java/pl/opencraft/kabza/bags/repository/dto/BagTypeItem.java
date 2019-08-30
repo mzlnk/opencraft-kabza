@@ -9,6 +9,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
+import static pl.opencraft.KabzaPlugin.plugin;
+
 /**
  * Created by Marcin Zielonka on 25/08/2019.
  */

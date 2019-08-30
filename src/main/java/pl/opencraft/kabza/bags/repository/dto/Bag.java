@@ -107,17 +107,20 @@ public class Bag {
     public boolean isItemApplicable(ItemStack itemStack) {
         BagType bagType = plugin.bagTypesService.findBagType(bagTypeId).orElse(null);
         if (bagType == null) {
-            plugin.getLogger().info("[BC] bagType is null");
             return false;
         }
 
+        if(bagType.isAllItemsAllowed()) {
+            return true;
+        }
+
         for(BagTypeItem bagTypeItem : bagType.getAllowedItems()) {
-            if(!bagTypeItem.isItemApplicable(itemStack)) {
-                return false;
+            if(bagTypeItem.isItemApplicable(itemStack)) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public void addItem(ItemStack itemStack, int amount) {

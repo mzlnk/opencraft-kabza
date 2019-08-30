@@ -9,7 +9,6 @@ import pl.opencraft.kabza.commands.base.CmdRoot;
 import pl.opencraft.kabza.commands.methods.CmdInMaintenance;
 import pl.opencraft.kabza.commands.methods.GiveBag;
 import pl.opencraft.kabza.commands.methods.InspectBag;
-import pl.opencraft.kabza.commands.methods.bagtype.InspectBagType;
 import pl.opencraft.kabza.commands.methods.Reload;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class KabzaCommandExecutor implements CommandExecutor, TabCompleter {
                     new CmdNode("inspect").setMethod(new InspectBag())
             ),
             new CmdNode("bagtype").subCmds(
-                    new CmdNode("<bag_type_id>>").subCmds(
+                    new CmdNode("<bag_type_id>").subCmds(
                             new CmdNode("create").setMethod(new CmdInMaintenance()),
                             new CmdNode("inspect").subCmds(
                                     new CmdNode("all").setMethod(new CmdInMaintenance()),

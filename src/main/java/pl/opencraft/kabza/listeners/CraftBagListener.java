@@ -26,6 +26,9 @@ public class CraftBagListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onCraftBag(PrepareItemCraftEvent event) {
+        if(event.getViewers().size() <= 0) {
+            return;
+        }
         UUID uuid = event.getViewers().get(0).getUniqueId();
         if (preCraftedBags.containsKey(uuid)) {
             ItemStack item = event.getInventory().getResult();

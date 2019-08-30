@@ -1,7 +1,7 @@
 name: Kabza
 main: pl.opencraft.KabzaPlugin
 api-version: 1.14
-version: 1.0
+version: 0.7.1
 description: Kabza Plugin
 
 commands:
