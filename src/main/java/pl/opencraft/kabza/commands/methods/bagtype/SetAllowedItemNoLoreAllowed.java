@@ -32,7 +32,7 @@ public class SetAllowedItemNoLoreAllowed extends BaseCmdMethod {
                 bagType.createOrUpdateAllowedItem(bagTypeItem);
                 plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-                sendSuccessMessage(params, "Pomyslnie zmieniono flage");
+                sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_SET_ALLOWED_ITEM_NO_LORE_ALLOWED));
             });
         });
     }

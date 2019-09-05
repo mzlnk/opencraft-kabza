@@ -28,7 +28,7 @@ public class SetBagItemType extends BaseCmdMethod {
             bagType.setBagItemType(params.itemType);
             plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-            sendSuccessMessage(params, "Pomyslnie zmieniono przedmiot");
+            sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_SET_BAG_TYPE_ITEM));
         });
     }
 

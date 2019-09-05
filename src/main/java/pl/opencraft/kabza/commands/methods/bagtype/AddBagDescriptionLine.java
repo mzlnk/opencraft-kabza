@@ -28,7 +28,7 @@ public class AddBagDescriptionLine extends BaseCmdMethod {
             bagType.getBagDescription().add(params.lineNo, params.line);
             plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-            sendSuccessMessage(params, "Pomyslnie zaktualizowano opis worka");
+            sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_ADDED_BAG_DESCRIPTION_LINE));
         });
     }
 }

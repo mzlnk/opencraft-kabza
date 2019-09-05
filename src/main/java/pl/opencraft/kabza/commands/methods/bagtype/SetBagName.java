@@ -27,7 +27,7 @@ public class SetBagName extends BaseCmdMethod {
             bagType.setBagName(params.bagName);
             plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-            sendSuccessMessage(params, "Pomyslnie zmieniono nazwe worka");
+            sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_SET_BAG_NAME));
         });
     }
 

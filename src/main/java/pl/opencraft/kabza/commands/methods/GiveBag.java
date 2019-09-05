@@ -1,8 +1,7 @@
 package pl.opencraft.kabza.commands.methods;
 
 import pl.opencraft.kabza.bags.repository.dto.Bag;
-import pl.opencraft.kabza.commands.base.CmdDescription;
-import pl.opencraft.kabza.commands.base.CmdMethod;
+import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
 import pl.opencraft.kabza.messages.MessageEnum;
 
@@ -13,7 +12,7 @@ import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
  * Created by Marcin Zielonka on 15/08/2019.
  */
 
-public class GiveBag implements CmdMethod, CmdDescription {
+public class GiveBag extends BaseCmdMethod {
 
 
     @Override
@@ -28,5 +27,8 @@ public class GiveBag implements CmdMethod, CmdDescription {
 
         Bag bag = plugin.bagsService.createNewBag(params.bagTypeId);
         params.player.getInventory().setItemInMainHand(bag.toItemStack());
+
+        sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_OBTAINED_BAG));
     }
+
 }

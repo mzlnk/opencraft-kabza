@@ -1,6 +1,7 @@
 package pl.opencraft.kabza.commands.methods;
 
 import org.bukkit.ChatColor;
+import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdDescription;
 import pl.opencraft.kabza.commands.base.CmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
@@ -15,7 +16,7 @@ import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.should;
  * Created by Marcin Zielonka on 15/08/2019.
  */
 
-public class Reload implements CmdMethod, CmdDescription {
+public class Reload extends BaseCmdMethod {
     @Override
     public String description() {
         return plugin.messages.get(MessageEnum.CMD_INFO_RELOAD);
@@ -27,6 +28,7 @@ public class Reload implements CmdMethod, CmdDescription {
 
         plugin.bagsService.reload();
         plugin.bagTypesService.reload();
-        params.player.sendMessage(PREFIX + ChatColor.GREEN + "Plugin zostal zaladowany ponownie");
+
+        sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_PLUGIN_RELOADED));
     }
 }

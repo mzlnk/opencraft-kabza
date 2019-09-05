@@ -30,6 +30,6 @@ public class CreateBagType extends BaseCmdMethod {
                 .build();
 
         plugin.bagTypesService.createOrUpdateBagType(bagType);
-        sendSuccessMessage(params, "Pomyslnie utworzono nowy worek!");
+        sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_CREATED_BAG_TYPE));
     }
 }

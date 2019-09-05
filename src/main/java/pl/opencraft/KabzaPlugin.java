@@ -70,7 +70,7 @@ public class KabzaPlugin extends JavaPlugin implements KabzaApi {
 
     private void createMessageBundle() {
         FileConfiguration config = getConfig();
-        String locale = config.getString("locale", "pl");
+        String locale = config.getString("locale", "en");
         messages = new MessageBundle(locale);
     }
 

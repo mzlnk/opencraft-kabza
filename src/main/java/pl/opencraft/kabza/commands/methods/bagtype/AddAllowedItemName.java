@@ -32,7 +32,7 @@ public class AddAllowedItemName extends BaseCmdMethod {
                 bagType.createOrUpdateAllowedItem(bagTypeItem);
                 plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-                sendSuccessMessage(params, "Nazwa zostala dodana");
+                sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_ADDED_ALLOWED_ITEM_NAME));
             });
         });
     }

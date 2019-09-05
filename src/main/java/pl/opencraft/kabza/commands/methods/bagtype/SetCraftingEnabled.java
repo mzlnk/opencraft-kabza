@@ -28,7 +28,7 @@ public class SetCraftingEnabled extends BaseCmdMethod {
             bagType.setCraftingEnabled(params.flag);
             plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-            sendSuccessMessage(params, "Pomyslnie ustawiono flage.");
+            sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_SET_CRAFTING_ENABLED));
         });
     }
 

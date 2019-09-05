@@ -27,7 +27,7 @@ public class ClearBagDescription extends BaseCmdMethod {
             bagType.getBagDescription().clear();
             plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-            sendSuccessMessage(params, "Pomyslnie usunieto opis worka");
+            sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_CLEARED_BAG_DESCRIPTION));
         });
     }
 

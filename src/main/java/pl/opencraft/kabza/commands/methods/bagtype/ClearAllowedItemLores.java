@@ -34,7 +34,7 @@ public class ClearAllowedItemLores extends BaseCmdMethod {
                 bagType.createOrUpdateAllowedItem(bagTypeItem);
                 plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-                sendSuccessMessage(params, "Pomyslnie usunieto dopuszczalne nazwy z danego typu przedmiotu");
+                sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_CLEARED_ALLOWED_ITEM_LORES));
             });
         });
     }

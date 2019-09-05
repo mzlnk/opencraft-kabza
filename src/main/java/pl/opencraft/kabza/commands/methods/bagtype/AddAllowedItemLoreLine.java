@@ -34,7 +34,7 @@ public class AddAllowedItemLoreLine extends BaseCmdMethod {
                 bagType.createOrUpdateAllowedItem(bagTypeItem);
                 plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-                sendSuccessMessage(params, "Pomyslnie dodano linie do Lore");
+                sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_ADDED_ALLOWED_ITEM_LORE_LINE));
             });
         });
     }

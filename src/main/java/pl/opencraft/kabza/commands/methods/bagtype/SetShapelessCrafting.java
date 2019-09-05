@@ -27,7 +27,7 @@ public class SetShapelessCrafting extends BaseCmdMethod {
             bagType.setShapelessCrafting(params.flag);
             plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-            sendSuccessMessage(params, "Pomyslnie ustawiono flage");
+            sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_SET_SHAPELESS_CRAFTING));
         });
 
     }

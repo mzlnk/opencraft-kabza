@@ -33,7 +33,7 @@ public class RemoveAllowedItemName extends BaseCmdMethod {
                 bagType.createOrUpdateAllowedItem(bagTypeItem);
                 plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-                sendSuccessMessage(params, "Pomyslnie zaktualizowano liste dopuszczalnych nazw");
+                sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_REMOVED_ALLOWED_ITEM_NAME));
             });
         });
     }

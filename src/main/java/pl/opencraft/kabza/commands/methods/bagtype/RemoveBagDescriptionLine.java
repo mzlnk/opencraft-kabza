@@ -28,7 +28,7 @@ public class RemoveBagDescriptionLine extends BaseCmdMethod {
             bagType.getBagDescription().remove(params.lineNo);
             plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-            sendSuccessMessage(params, "Pomyslnie zaktualizowano opis");
+            sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_REMOVED_BAG_DESCRIPTION_LINE));
         });
     }
 
