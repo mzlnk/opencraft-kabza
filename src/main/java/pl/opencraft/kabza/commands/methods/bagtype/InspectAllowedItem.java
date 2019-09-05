@@ -13,7 +13,7 @@ import static pl.opencraft.kabza.utils.StringUtil.firstLetterUpperCase;
  * Created by Marcin Zielonka on 2019.09.05
  */
 
-public class InspectBagTypeAllowedItem extends BaseCmdMethod {
+public class InspectAllowedItem extends BaseCmdMethod {
 
     @Override
     public String description() {

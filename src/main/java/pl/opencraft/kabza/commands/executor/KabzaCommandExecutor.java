@@ -32,7 +32,7 @@ public class KabzaCommandExecutor implements CommandExecutor, TabCompleter {
                             new CmdNode("inspect").subCmds(
                                     new CmdNode("all").setMethod(new InspectBagType()),
                                     new CmdNode("alloweditem").subCmds(
-                                            new CmdNode("<item_type>").setMethod(new InspectBagTypeAllowedItem())
+                                            new CmdNode("<item_type>").setMethod(new InspectAllowedItem())
                                     )
                             ),
                             new CmdNode("edit").subCmds(
