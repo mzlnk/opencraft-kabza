@@ -22,6 +22,8 @@ public class CmdMethodParams {
     public String bagName;
 
     public int lineNo;
+    public int nameNo;
+    public int loreNo;
     public String line;
     public String name;
 

@@ -7,14 +7,14 @@ import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
 
 /**
- * Created by Marcin Zielonka on 30/08/2019.
+ * Created by Marcin Zielonka on 2019.09.05
  */
 
-public class RemoveAllowedItemName extends BaseCmdMethod {
+public class RemoveAllowedItemLore extends BaseCmdMethod {
 
     @Override
     public String description() {
-        return "usuniecie dopuszczalnej nazwy z danego typu przedmiotu";
+        return "usuniecie dopuszczalnego Lore z danego typu przedmiotu";
     }
 
     @Override
@@ -23,18 +23,19 @@ public class RemoveAllowedItemName extends BaseCmdMethod {
         should(bagTypeExists, params);
         should(itemTypeExists, params);
         should(allowedItemTypeExists, params);
-        should(allowedItemNameNoIsValid, params);
+        should(allowedItemLoreNoIsValid, params);
 
         plugin.bagTypesService.findBagType(params.bagTypeId).ifPresent(bagType -> {
             bagType.findAllowedItemByType(params.itemType).ifPresent(bagTypeItem -> {
-                bagTypeItem.getNames().remove(params.lineNo);
+                bagTypeItem.getLores().remove(params.loreNo);
 
                 bagType.createOrUpdateAllowedItem(bagTypeItem);
                 plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-                sendSuccessMessage(params, "Pomyslnie zaktualizowano liste dopuszczalnych nazw");
+                sendSuccessMessage(params, "Pomyslnie zaktualizowano liste dopuszczalnych Lore");
             });
         });
+
     }
 
 }

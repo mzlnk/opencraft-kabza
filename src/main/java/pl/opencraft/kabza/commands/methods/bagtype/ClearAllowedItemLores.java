@@ -5,16 +5,18 @@ import pl.opencraft.kabza.commands.base.CmdMethodParams;
 
 import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
+import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.allowedItemTypeExists;
+import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.should;
 
 /**
- * Created by Marcin Zielonka on 30/08/2019.
+ * Created by Marcin Zielonka on 2019.09.05
  */
 
-public class RemoveAllowedItemName extends BaseCmdMethod {
+public class ClearAllowedItemLores extends BaseCmdMethod {
 
     @Override
     public String description() {
-        return "usuniecie dopuszczalnej nazwy z danego typu przedmiotu";
+        return "usuniecie wszystkich dozwolonych Lore z danego typu przedmiotu";
     }
 
     @Override
@@ -23,16 +25,15 @@ public class RemoveAllowedItemName extends BaseCmdMethod {
         should(bagTypeExists, params);
         should(itemTypeExists, params);
         should(allowedItemTypeExists, params);
-        should(allowedItemNameNoIsValid, params);
 
         plugin.bagTypesService.findBagType(params.bagTypeId).ifPresent(bagType -> {
             bagType.findAllowedItemByType(params.itemType).ifPresent(bagTypeItem -> {
-                bagTypeItem.getNames().remove(params.lineNo);
+                bagTypeItem.getNames().clear();
 
                 bagType.createOrUpdateAllowedItem(bagTypeItem);
                 plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-                sendSuccessMessage(params, "Pomyslnie zaktualizowano liste dopuszczalnych nazw");
+                sendSuccessMessage(params, "Pomyslnie usunieto dopuszczalne nazwy z danego typu przedmiotu");
             });
         });
     }

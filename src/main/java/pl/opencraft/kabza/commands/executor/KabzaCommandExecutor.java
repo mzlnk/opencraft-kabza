@@ -6,11 +6,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import pl.opencraft.kabza.commands.base.CmdNode;
 import pl.opencraft.kabza.commands.base.CmdRoot;
-import pl.opencraft.kabza.commands.methods.CmdInMaintenance;
 import pl.opencraft.kabza.commands.methods.GiveBag;
 import pl.opencraft.kabza.commands.methods.InspectBag;
 import pl.opencraft.kabza.commands.methods.Reload;
-import pl.opencraft.kabza.commands.methods.bagtype.CreateBagType;
+import pl.opencraft.kabza.commands.methods.bagtype.*;
 
 import java.util.List;
 
@@ -31,82 +30,80 @@ public class KabzaCommandExecutor implements CommandExecutor, TabCompleter {
                     new CmdNode("<bag_type_id>").subCmds(
                             new CmdNode("create").setMethod(new CreateBagType()),
                             new CmdNode("inspect").subCmds(
-                                    new CmdNode("all").setMethod(new CmdInMaintenance()),
-                                    new CmdNode("alloweditems").subCmds(
-                                            new CmdNode("all").setMethod(new CmdInMaintenance()),
-                                            new CmdNode("item").subCmds(
-                                                    new CmdNode("<item_type>").setMethod(new CmdInMaintenance())
-                                            )
+                                    new CmdNode("all").setMethod(new InspectBagType()),
+                                    new CmdNode("alloweditem").subCmds(
+                                            new CmdNode("<item_type>").setMethod(new InspectBagTypeAllowedItem())
                                     )
                             ),
                             new CmdNode("edit").subCmds(
                                     new CmdNode("set").subCmds(
                                             new CmdNode("bagname").subCmds(
-                                                    new CmdNode("<bag_name>").setMethod(new CmdInMaintenance())
+                                                    new CmdNode("<bag_name>").setMethod(new SetBagName())
                                             ),
                                             new CmdNode("bagitemtype").subCmds(
-                                                    new CmdNode("<item_type>").setMethod(new CmdInMaintenance())
+                                                    new CmdNode("<item_type>").setMethod(new SetBagItemType())
                                             ),
                                             new CmdNode("craftingenabled").subCmds(
-                                                    new CmdNode("<flag>").setMethod(new CmdInMaintenance())
+                                                    new CmdNode("<flag>").setMethod(new SetCraftingEnabled())
                                             ),
                                             new CmdNode("shapelesscrafting").subCmds(
-                                                    new CmdNode("<flag>").setMethod(new CmdInMaintenance())
+                                                    new CmdNode("<flag>").setMethod(new SetShapelessCrafting())
                                             ),
                                             new CmdNode("allitemsallowed").subCmds(
-                                                    new CmdNode("<flag>").setMethod(new CmdInMaintenance())
+                                                    new CmdNode("<flag>").setMethod(new SetAllItemsAllowed())
                                             )
                                     ),
                                     new CmdNode("edit").subCmds(
                                             new CmdNode("bagdescription").subCmds(
                                                     new CmdNode("add").subCmds(
                                                             new CmdNode("<line_no>").subCmds(
-                                                                    new CmdNode("<line>").setMethod(new CmdInMaintenance())
+                                                                    new CmdNode("<line>").setMethod(new AddBagDescriptionLine())
                                                             )
                                                     ),
                                                     new CmdNode("remove").subCmds(
-                                                            new CmdNode("<line_no>").setMethod(new CmdInMaintenance())
+                                                            new CmdNode("<line_no>").setMethod(new RemoveBagDescriptionLine())
                                                     ),
-                                                    new CmdNode("clear").setMethod(new CmdInMaintenance())
+                                                    new CmdNode("clear").setMethod(new ClearBagDescription())
                                             ),
                                             new CmdNode("alloweditems").subCmds(
                                                     new CmdNode("<item_type>").subCmds(
                                                             new CmdNode("set").subCmds(
                                                                     new CmdNode("allnamesallowed").subCmds(
-                                                                            new CmdNode("<flag>").setMethod(new CmdInMaintenance())
+                                                                            new CmdNode("<flag>").setMethod(new SetAllowedItemAllNamesAllowed())
                                                                     ),
                                                                     new CmdNode("allloresallowed").subCmds(
-                                                                            new CmdNode("<flag>").setMethod(new CmdInMaintenance())
+                                                                            new CmdNode("<flag>").setMethod(new SetAllowedItemAllLoresAllowed())
                                                                     ),
-                                                                    new CmdNode("nonamesallowed").subCmds(
-                                                                            new CmdNode("<flag>").setMethod(new CmdInMaintenance())
+                                                                    new CmdNode("nonameallowed").subCmds(
+                                                                            new CmdNode("<flag>").setMethod(new SetAllowedItemNoNameAllowed())
                                                                     ),
-                                                                    new CmdNode("noloresallowed").subCmds(
-                                                                            new CmdNode("<flag>").setMethod(new CmdInMaintenance())
+                                                                    new CmdNode("noloreallowed").subCmds(
+                                                                            new CmdNode("<flag>").setMethod(new SetAllowedItemNoLoreAllowed())
                                                                     )
                                                             ),
                                                             new CmdNode("edit").subCmds(
                                                                     new CmdNode("names").subCmds(
                                                                             new CmdNode("add").subCmds(
-                                                                                    new CmdNode("<name>").setMethod(new CmdInMaintenance())
+                                                                                    new CmdNode("<name>").setMethod(new AddAllowedItemName())
                                                                             ),
                                                                             new CmdNode("remove").subCmds(
-                                                                                    new CmdNode("<line_no>").setMethod(new CmdInMaintenance())
+                                                                                    new CmdNode("<name_no>").setMethod(new RemoveAllowedItemName())
                                                                             ),
-                                                                            new CmdNode("clear").setMethod(new CmdInMaintenance())
+                                                                            new CmdNode("clear").setMethod(new ClearAllowedItemNames())
                                                                     ),
                                                                     new CmdNode("lores").subCmds(
                                                                             new CmdNode("<lore_no>").subCmds(
                                                                                     new CmdNode("add").subCmds(
                                                                                             new CmdNode("<line_no>").subCmds(
-                                                                                                    new CmdNode("<line>").setMethod(new CmdInMaintenance())
+                                                                                                    new CmdNode("<line>").setMethod(new AddAllowedItemLoreLine())
                                                                                             )
                                                                                     ),
                                                                                     new CmdNode("remove").subCmds(
-                                                                                            new CmdNode("<line_no>").setMethod(new CmdInMaintenance())
-                                                                                    ),
-                                                                                    new CmdNode("clear").setMethod(new CmdInMaintenance())
-                                                                            )
+                                                                                            new CmdNode("all").setMethod(new RemoveAllowedItemLore()),
+                                                                                            new CmdNode("<line_no>").setMethod(new RemoveAllowedItemLoreLine())
+                                                                                    )
+                                                                            ),
+                                                                            new CmdNode("clear").setMethod(new ClearAllowedItemLores())
                                                                     )
                                                             )
                                                     )

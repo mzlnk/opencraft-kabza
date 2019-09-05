@@ -94,7 +94,13 @@ public class CmdNode {
             params.setFlag(Boolean.parseBoolean(label));
         }
         if(token.equals("<line_no>")) {
-            params.setLineNo(NumberUtils.toInt(label, 0));
+            params.setLineNo(NumberUtils.toInt(label, -1));
+        }
+        if(token.equals("<name_no>")) {
+            params.setNameNo(NumberUtils.toInt(label, -1));
+        }
+        if(token.equals("<lore_no")) {
+            params.setLoreNo(NumberUtils.toInt(label, -1));
         }
         if(token.equals("<line>")) {
             params.setLine(label);

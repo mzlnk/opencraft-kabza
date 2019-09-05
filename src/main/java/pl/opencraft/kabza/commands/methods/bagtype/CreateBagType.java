@@ -1,22 +1,17 @@
 package pl.opencraft.kabza.commands.methods.bagtype;
 
 import pl.opencraft.kabza.bags.repository.dto.BagType;
-import pl.opencraft.kabza.commands.base.CmdDescription;
-import pl.opencraft.kabza.commands.base.CmdMethod;
+import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
 
-import static pl.opencraft.KabzaPlugin.PREFIX;
-import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.bagTypeNotExist;
-import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.playerHasAdminPermission;
-import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.should;
 import static pl.opencraft.KabzaPlugin.plugin;
-import static org.bukkit.ChatColor.GREEN;
+import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
 
 /**
  * Created by Marcin Zielonka on 30/08/2019.
  */
 
-public class CreateBagType implements CmdMethod, CmdDescription {
+public class CreateBagType extends BaseCmdMethod {
 
     @Override
     public String description() {
@@ -34,6 +29,6 @@ public class CreateBagType implements CmdMethod, CmdDescription {
                 .build();
 
         plugin.bagTypesService.createOrUpdateBagType(bagType);
-        params.sender.sendMessage(PREFIX + GREEN + "Pomyslnie utworzono nowy worek!");
+        sendSuccessMessage(params, "Pomyslnie utworzono nowy worek!");
     }
 }

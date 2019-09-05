@@ -1,20 +1,19 @@
 package pl.opencraft.kabza.commands.methods.bagtype;
 
 import pl.opencraft.kabza.bags.repository.dto.BagTypeItem;
-import pl.opencraft.kabza.commands.base.CmdDescription;
-import pl.opencraft.kabza.commands.base.CmdMethod;
+import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
 
-import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
-import static pl.opencraft.KabzaPlugin.plugin;
 import static org.bukkit.ChatColor.*;
+import static pl.opencraft.KabzaPlugin.plugin;
+import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
 import static pl.opencraft.kabza.utils.StringUtil.firstLetterUpperCase;
 
 /**
  * Created by Marcin Zielonka on 2019.09.05
  */
 
-public class InspectBagTypeAllowedItemType implements CmdMethod, CmdDescription {
+public class InspectBagTypeAllowedItem extends BaseCmdMethod {
 
     @Override
     public String description() {
@@ -32,13 +31,13 @@ public class InspectBagTypeAllowedItemType implements CmdMethod, CmdDescription 
             StringBuilder sb = new StringBuilder();
 
             BagTypeItem bagTypeItem = null;
-            for(BagTypeItem item : bagType.getAllowedItems()) {
-                if(item.getType().equals(params.itemType)) {
+            for (BagTypeItem item : bagType.getAllowedItems()) {
+                if (item.getType().equals(params.itemType)) {
                     bagTypeItem = item;
                 }
             }
 
-            if(bagTypeItem == null) {
+            if (bagTypeItem == null) {
                 return;
             }
 
@@ -50,14 +49,14 @@ public class InspectBagTypeAllowedItemType implements CmdMethod, CmdDescription 
             sb.append(GRAY).append("no_lore_allowed: ").append(WHITE).append(bagTypeItem.isNoLoreAllowed()).append("\n");
 
             sb.append(GRAY).append("allowed_names:").append("\n");
-            for(String name : bagTypeItem.getNames()) {
+            for (String name : bagTypeItem.getNames()) {
                 sb.append(WHITE).append("- ").append(name).append("\n");
             }
 
             sb.append(GRAY).append("allowed_lores:").append("\n");
-            for(int i = 0, j = 1; i < bagTypeItem.getLores().size(); i++, j++) {
+            for (int i = 0, j = 1; i < bagTypeItem.getLores().size(); i++, j++) {
                 sb.append(WHITE).append("Lore #").append(j).append(":").append("\n");
-                for(String s : bagTypeItem.getLores().get(i).getLore()) {
+                for (String s : bagTypeItem.getLores().get(i).getLore()) {
                     sb.append(WHITE).append("- ").append(s).append("\n");
                 }
             }

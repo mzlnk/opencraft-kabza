@@ -1,17 +1,19 @@
 package pl.opencraft.kabza.bags.repository.dto;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Marcin Zielonka on 14/08/2019.
  */
 
-@Getter
+@Data
 @Builder
 public class BagType implements Identifiable {
 
@@ -33,5 +35,35 @@ public class BagType implements Identifiable {
     @Builder.Default
     private List<BagTypeItem> allowedItems = new ArrayList<>();
 
+    public Optional<BagTypeItem> findAllowedItemByType(Material type) {
+        for(BagTypeItem item : allowedItems) {
+            if(item.getType().equals(type)) {
+                return Optional.of(item);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public void createOrUpdateAllowedItem(BagTypeItem bagTypeItem) {
+        if(allowedItems.stream().anyMatch(item -> item.getType().equals(bagTypeItem.getType()))) {
+            for(int i = 0; i < allowedItems.size(); i++) {
+                if(allowedItems.get(i).getType().equals(bagTypeItem.getType())) {
+                    allowedItems.remove(i);
+                    break;
+                }
+            }
+        }
+
+        allowedItems.add(bagTypeItem);
+    }
+
+    public void removeAllowedItem(Material itemType) {
+        for(int i = 0; i < allowedItems.size(); i++) {
+            if(allowedItems.get(i).getType().equals(itemType)) {
+                allowedItems.remove(i);
+                break;
+            }
+        }
+    }
 
 }

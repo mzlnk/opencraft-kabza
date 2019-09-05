@@ -3,16 +3,15 @@ package pl.opencraft.kabza.commands.methods.bagtype;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import pl.opencraft.kabza.bags.repository.dto.BagTypeItem;
-import pl.opencraft.kabza.commands.base.CmdDescription;
-import pl.opencraft.kabza.commands.base.CmdMethod;
+import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
 
-import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
-import static pl.opencraft.KabzaPlugin.plugin;
 import static org.bukkit.ChatColor.*;
+import static pl.opencraft.KabzaPlugin.plugin;
+import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
 import static pl.opencraft.kabza.utils.StringUtil.firstLetterUpperCase;
 
-public class InspectBagType implements CmdMethod, CmdDescription {
+public class InspectBagType extends BaseCmdMethod {
 
     @Override
     public String description() {
@@ -51,7 +50,7 @@ public class InspectBagType implements CmdMethod, CmdDescription {
             sb.append(GRAY).append("all_items_allowed: ").append(WHITE).append(bagType.isAllItemsAllowed()).append("\n");
 
             sb.append(GRAY).append("allowed_item_types:").append("\n");
-            for(BagTypeItem item : bagType.getAllowedItems()) {
+            for (BagTypeItem item : bagType.getAllowedItems()) {
                 sb.append(WHITE).append("- ").append(firstLetterUpperCase(item.getType().name())).append("\n");
             }
 
