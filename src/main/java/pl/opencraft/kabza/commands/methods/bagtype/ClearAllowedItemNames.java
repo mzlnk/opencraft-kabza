@@ -2,6 +2,7 @@ package pl.opencraft.kabza.commands.methods.bagtype;
 
 import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
@@ -14,7 +15,7 @@ public class ClearAllowedItemNames extends BaseCmdMethod {
 
     @Override
     public String description() {
-        return "usuniecie wszystkich dozwolonych nazw z danego typu przedmiotu";
+        return plugin.messages.get(MessageEnum.CMD_INFO_CLEAR_ALLOWED_ITEM_NAMES);
     }
 
     @Override

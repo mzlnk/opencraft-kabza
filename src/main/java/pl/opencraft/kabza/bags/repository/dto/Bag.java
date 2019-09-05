@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import pl.opencraft.kabza.bags.exception.BagTypeNotFoundException;
+import pl.opencraft.kabza.messages.MessageEnum;
 import pl.opencraft.kabza.nbtserializer.dto.NbtTagDto;
 import pl.opencraft.kabza.nbtserializer.dto.NbtTagType;
 
@@ -158,8 +159,8 @@ public class Bag {
         }
         lore.add("");
 
-        lore.add(GRAY + "Zajete sloty: " + WHITE + this.getOccupiedSlots() + "/27");
-        lore.add(GRAY + "Zapelnienie: " + WHITE + this.getPercentageCapacity() + "%");
+        lore.add(GRAY + plugin.messages.get(MessageEnum.BAG_INFO_OCCUPIED_SLOTS) + ": " + WHITE + this.getOccupiedSlots() + "/27");
+        lore.add(GRAY + plugin.messages.get(MessageEnum.BAG_INFO_CAPACITY) + ": " + WHITE + this.getPercentageCapacity() + "%");
         lore.add("");
 
         itemMeta.setLore(lore);

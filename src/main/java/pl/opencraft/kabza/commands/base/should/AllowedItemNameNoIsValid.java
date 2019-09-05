@@ -2,6 +2,7 @@ package pl.opencraft.kabza.commands.base.should;
 
 import pl.opencraft.kabza.bags.repository.dto.BagTypeItem;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 /**
  * Created by Marcin Zielonka on 2019.09.05
@@ -28,6 +29,7 @@ public class AllowedItemNameNoIsValid extends CmdParamsValidator {
 
     @Override
     String failMessage() {
-        return PREFIX + RED + "Podany indeks w liscie nazw nie istnieje!";
+        return PREFIX + RED + plugin.messages.get(MessageEnum.CMD_ERROR_NAME_NO_NOT_VALID);
     }
+
 }

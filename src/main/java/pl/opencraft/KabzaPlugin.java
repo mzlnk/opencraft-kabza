@@ -1,5 +1,6 @@
 package pl.opencraft;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.opencraft.kabza.KabzaApi;
@@ -11,6 +12,7 @@ import pl.opencraft.kabza.commands.executor.KabzaCommandExecutor;
 import pl.opencraft.kabza.listeners.CollectItemListener;
 import pl.opencraft.kabza.listeners.CraftBagListener;
 import pl.opencraft.kabza.listeners.OpenBagListener;
+import pl.opencraft.kabza.messages.MessageBundle;
 import pl.opencraft.kabza.nbtserializer.NbtSerializer;
 import pl.opencraft.kabza.nbtserializer.NbtSerializerImpl;
 import pl.opencraft.kabza.utils.FileUtil;
@@ -34,6 +36,8 @@ public class KabzaPlugin extends JavaPlugin implements KabzaApi {
     public FileUtil fileUtil;
     public NbtSerializer nbtSerializer;
 
+    public MessageBundle messages;
+
     public BagsService bagsService;
     public BagTypesService bagTypesService;
 
@@ -43,12 +47,8 @@ public class KabzaPlugin extends JavaPlugin implements KabzaApi {
 
     @Override
     public void onEnable() {
-        fileUtil = new FileUtil(this);
-        nbtSerializer = new NbtSerializerImpl();
-
-        bagsService = new BagsServiceImpl();
-        bagTypesService = new BagTypesServiceImpl();
-
+        createContext();
+        createMessageBundle();
         registerCommands();
         registerListeners();
     }
@@ -66,6 +66,20 @@ public class KabzaPlugin extends JavaPlugin implements KabzaApi {
     @Override
     public BagTypesService getBagTypesService() {
         return bagTypesService;
+    }
+
+    private void createMessageBundle() {
+        FileConfiguration config = getConfig();
+        String locale = config.getString("locale", "pl");
+        messages = new MessageBundle(locale);
+    }
+
+    private void createContext() {
+        fileUtil = new FileUtil(this);
+        nbtSerializer = new NbtSerializerImpl();
+
+        bagsService = new BagsServiceImpl();
+        bagTypesService = new BagTypesServiceImpl();
     }
 
     private void registerCommands() {

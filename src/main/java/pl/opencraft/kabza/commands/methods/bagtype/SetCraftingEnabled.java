@@ -2,6 +2,7 @@ package pl.opencraft.kabza.commands.methods.bagtype;
 
 import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
@@ -15,7 +16,7 @@ public class SetCraftingEnabled extends BaseCmdMethod {
 
     @Override
     public String description() {
-        return "ustawienie flagi, okreslajacej czy ma byc mozliwosc craftingu worka";
+        return plugin.messages.get(MessageEnum.CMD_INFO_SET_CRAFTING_ENABLED);
     }
 
     @Override

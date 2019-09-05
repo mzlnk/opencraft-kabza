@@ -4,6 +4,7 @@ import pl.opencraft.kabza.bags.repository.dto.BagItem;
 import pl.opencraft.kabza.commands.base.CmdDescription;
 import pl.opencraft.kabza.commands.base.CmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static org.bukkit.ChatColor.*;
 import static pl.opencraft.KabzaPlugin.plugin;
@@ -13,7 +14,7 @@ public class InspectBag implements CmdMethod, CmdDescription {
 
     @Override
     public String description() {
-        return "wyswietlenie szczegolow kabzy";
+        return plugin.messages.get(MessageEnum.CMD_INFO_INSPECT_BAG);
     }
 
     @Override

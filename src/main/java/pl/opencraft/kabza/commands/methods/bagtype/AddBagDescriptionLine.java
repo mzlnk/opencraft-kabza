@@ -2,6 +2,7 @@ package pl.opencraft.kabza.commands.methods.bagtype;
 
 import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
@@ -14,7 +15,7 @@ public class AddBagDescriptionLine extends BaseCmdMethod {
 
     @Override
     public String description() {
-        return "dodanie nowej linii do opisu worka";
+        return plugin.messages.get(MessageEnum.CMD_INFO_ADD_BAG_DESCRIPTION_LINE);
     }
 
     @Override

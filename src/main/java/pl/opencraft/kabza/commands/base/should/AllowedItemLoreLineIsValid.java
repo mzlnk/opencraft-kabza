@@ -3,6 +3,7 @@ package pl.opencraft.kabza.commands.base.should;
 import pl.opencraft.kabza.bags.repository.dto.BagTypeItem;
 import pl.opencraft.kabza.bags.repository.dto.BagTypeItemLore;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class AllowedItemLoreLineIsValid extends CmdParamsValidator {
 
     @Override
     String failMessage() {
-        return PREFIX + RED + "Niewlasciwy numer linii!";
+        return PREFIX + RED + plugin.messages.get(MessageEnum.CMD_ERROR_LORE_LINE_NOT_VALID);
     }
 
 }

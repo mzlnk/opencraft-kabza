@@ -2,6 +2,7 @@ package pl.opencraft.kabza.commands.base.should;
 
 import pl.opencraft.kabza.bags.repository.dto.BagType;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static org.bukkit.ChatColor.RED;
 import static pl.opencraft.KabzaPlugin.PREFIX;
@@ -23,7 +24,7 @@ public class BagDescriptionLineIsValid extends CmdParamsValidator {
 
     @Override
     String failMessage() {
-        return PREFIX + RED + "Niewlasciwy numer linii!";
+        return PREFIX + RED + plugin.messages.get(MessageEnum.CMD_ERROR_BAG_DESCRIPTION_LINE_NOT_VALID);
     }
 
 }

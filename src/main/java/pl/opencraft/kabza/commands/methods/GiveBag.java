@@ -4,6 +4,7 @@ import pl.opencraft.kabza.bags.repository.dto.Bag;
 import pl.opencraft.kabza.commands.base.CmdDescription;
 import pl.opencraft.kabza.commands.base.CmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
@@ -17,7 +18,7 @@ public class GiveBag implements CmdMethod, CmdDescription {
 
     @Override
     public String description() {
-        return "otrzymanie specjalnego worka";
+        return plugin.messages.get(MessageEnum.CMD_INFO_GIVE_BAG);
     }
 
     @Override

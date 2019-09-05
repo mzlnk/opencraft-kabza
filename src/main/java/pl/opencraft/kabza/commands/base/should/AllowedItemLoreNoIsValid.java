@@ -3,6 +3,7 @@ package pl.opencraft.kabza.commands.base.should;
 import pl.opencraft.kabza.bags.repository.dto.BagTypeItem;
 import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class AllowedItemLoreNoIsValid extends CmdParamsValidator {
 
     @Override
     String failMessage() {
-        return PREFIX + RED + "Podany indeks w liscie z Lore nie istnieje!";
+        return PREFIX + RED + plugin.messages.get(MessageEnum.CMD_ERROR_LORE_NO_NOT_VALID);
     }
 
 }

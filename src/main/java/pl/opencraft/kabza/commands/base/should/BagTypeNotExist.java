@@ -1,6 +1,7 @@
 package pl.opencraft.kabza.commands.base.should;
 
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.KabzaPlugin.PREFIX;
@@ -20,6 +21,7 @@ public class BagTypeNotExist extends CmdParamsValidator {
 
     @Override
     String failMessage() {
-        return PREFIX + RED + "Typ kabzy od danym ID juz istnieje!";
+        return PREFIX + RED + plugin.messages.get(MessageEnum.CMD_ERROR_BAG_TYPE_EXIST);
     }
+
 }

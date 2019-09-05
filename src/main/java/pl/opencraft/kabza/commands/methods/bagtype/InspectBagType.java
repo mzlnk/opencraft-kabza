@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import pl.opencraft.kabza.bags.repository.dto.BagTypeItem;
 import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static org.bukkit.ChatColor.*;
 import static pl.opencraft.KabzaPlugin.plugin;
@@ -15,7 +16,7 @@ public class InspectBagType extends BaseCmdMethod {
 
     @Override
     public String description() {
-        return "wyswietlenie informacji o typie kabzy";
+        return plugin.messages.get(MessageEnum.CMD_INFO_INSPECT_BAG_TYPE);
     }
 
     @Override

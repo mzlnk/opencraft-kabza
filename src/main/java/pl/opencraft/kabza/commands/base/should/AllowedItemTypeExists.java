@@ -2,6 +2,7 @@ package pl.opencraft.kabza.commands.base.should;
 
 import pl.opencraft.kabza.bags.repository.dto.BagType;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.KabzaPlugin.PREFIX;
@@ -23,6 +24,7 @@ public class AllowedItemTypeExists extends CmdParamsValidator {
 
     @Override
     String failMessage() {
-        return PREFIX + RED + "Przedmiot o danym typie nie jest przypisany do worka!";
+        return PREFIX + RED + plugin.messages.get(MessageEnum.CMD_ERROR_ITEM_TYPE_NOT_FOUND);
     }
+
 }

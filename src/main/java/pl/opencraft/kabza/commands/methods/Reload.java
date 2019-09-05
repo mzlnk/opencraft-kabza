@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import pl.opencraft.kabza.commands.base.CmdDescription;
 import pl.opencraft.kabza.commands.base.CmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static pl.opencraft.KabzaPlugin.PREFIX;
 import static pl.opencraft.KabzaPlugin.plugin;
@@ -17,7 +18,7 @@ import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.should;
 public class Reload implements CmdMethod, CmdDescription {
     @Override
     public String description() {
-        return "przeladowanie pluginu";
+        return plugin.messages.get(MessageEnum.CMD_INFO_RELOAD);
     }
 
     @Override

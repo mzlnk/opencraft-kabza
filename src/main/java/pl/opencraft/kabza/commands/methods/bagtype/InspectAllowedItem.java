@@ -3,6 +3,7 @@ package pl.opencraft.kabza.commands.methods.bagtype;
 import pl.opencraft.kabza.bags.repository.dto.BagTypeItem;
 import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
+import pl.opencraft.kabza.messages.MessageEnum;
 
 import static org.bukkit.ChatColor.*;
 import static pl.opencraft.KabzaPlugin.plugin;
@@ -17,7 +18,7 @@ public class InspectAllowedItem extends BaseCmdMethod {
 
     @Override
     public String description() {
-        return "wyswietlenie informacji o dozwolonym przedmiocie w danym worku";
+        return plugin.messages.get(MessageEnum.CMD_INFO_INSPECT_ALLOWED_ITEM);
     }
 
     @Override
