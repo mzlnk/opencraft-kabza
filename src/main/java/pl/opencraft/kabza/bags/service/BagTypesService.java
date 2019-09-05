@@ -14,6 +14,7 @@ public interface BagTypesService {
 
     Optional<BagType> findBagType(String id);
     Optional<BagType> fromRecipe(ItemStack[] matrix);
+    void createOrUpdateBagType(BagType bagType);
     List<BagType> findAll();
     void reload();
 

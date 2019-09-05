@@ -26,6 +26,11 @@ public class BagTypesServiceImpl implements BagTypesService {
     }
 
     @Override
+    public void createOrUpdateBagType(BagType bagType) {
+        bagTypesRepository.createOrUpdateBagType(bagType);
+    }
+
+    @Override
     public Optional<BagType> fromRecipe(ItemStack[] matrix) {
         return this.findAll().stream()
                 .filter(BagType::isCraftingEnabled)
