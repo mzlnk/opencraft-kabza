@@ -4,15 +4,15 @@ import pl.opencraft.kabza.bags.repository.dto.BagTypeItem;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
 import pl.opencraft.kabza.messages.MessageEnum;
 
+import java.util.Optional;
+
+import static org.bukkit.ChatColor.RED;
+import static pl.opencraft.KabzaPlugin.PREFIX;
+import static pl.opencraft.KabzaPlugin.plugin;
+
 /**
  * Created by Marcin Zielonka on 2019.09.05
  */
-
-import java.util.Optional;
-
-import static pl.opencraft.KabzaPlugin.PREFIX;
-import static org.bukkit.ChatColor.RED;
-import static pl.opencraft.KabzaPlugin.plugin;
 
 public class AllowedItemNameNoIsValid extends CmdParamsValidator {
 

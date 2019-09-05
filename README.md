@@ -45,6 +45,7 @@ Każdy typ worka reprezentowany jest przez plik `*.json` w folderze `/bagtypes`.
 * `bagDescription` - opis worka, który pojawi się w Lore przedmiotu
 * `bagItemType` - typ przedmiotu, który będzie reprezentować worek
 * `craftingEnabled` - flaga określająca, czy ma być możliwość craftingu worka
+* `shapelessCrafting` - flaga określająca, czy ma być możliwość craftingu worka w trybie _shapeless_ (tj. nie ma znaczenia ułożenie przedmiotów)
 * `craftingRecipe` - crafting worka (_kolejność przedmiotów w liście ma znaczenie!_)
 * `allowedItemAllowed` - flaga określająca, czy worek ma przyjmować wszystkie przedmioty
 * `allowedItems` - przedmioty, które mają być zbierane do worka
@@ -112,12 +113,46 @@ Każdy typ worka reprezentowany jest przez plik `*.json` w folderze `/bagtypes`.
 -----------------------
 ###Komendy
 
+**Oznaczenia:**
+
+*  `<bag_type_id>` - ID typu worka
+*  `<item_type>` - typ przedmiotu (np. RED_WOOL, CHEST)
+*  `<bag_name>` - nazwa worka
+*  `<flag>` - flaga przyjmująca wartości: `TRUE` lub `FALSE`
+*  `<line_no>` - numer linii
+*  `<lore_no>` - liczba porządkowa danego Lore na liście
+*  `<name_no>` - liczba porządkowa danej nazwy na liście
+*  `<name>` - nazwa
+*  `<line>` - linia (np. Lore)
+
+
 **Administracyjne:**
 
-*  `/kabza give bag <bag_type_id>` - otrzymanie specjalnego worka o danym type
-*  `/kabza inspect bagtype <bag_type_id>` - wyświetlenie szczegółowych informacji o danym typie worka
-*  `/kabza inspect bag` - wyświetla szczegółowe informacje na temat trzymanego w ręku worka
-*  `/kabza reload` - przeładowanie configów i przechowywanych danych, z których korzysta plugin
+*  `/kabza bag give <bag_type_id>` - otrzymanie worka o danym ID
+*  `/kabza bag inspect` - wyświetlenie informacji o worku trzymanym w ręce
+*  `/kabza bagtype <bag_type_id> create` - stworzenie nowego typu worka
+*  `/kabza bagtype <bag_type_id> inspect all` - wyświetlenie ogólnych informacji o danym typie worka
+*  `/kabza bagtype <bag_type_id> inspect alloweditem <item_type>` - wyświetlenie informacji o danym dopuszczalnym w worku przedmiocie
+*  `/kabza bagtype <bag_type_id> edit set bagname <bag_name>` - ustawienie nazwy worka o danym typie
+*  `/kabza bagtype <bag_type_id> edit set bagitemtype <item_type>` - ustawienie przedmiotu reprezentującego worek o danym type
+*  `/kabza bagtype <bag_type_id> edit set craftingenabled <flag>` - ustawienie, czy dany typ worka można scraftować
+*  `/kabza bagtype <bag_type_id> edit set shapelesscrafting <flag>` - ustawienie, czy dany typ ma mieć shapeless crafting 
+*  `/kabza bagtype <bag_type_id> edit set allitemsallowed <flag` - ustawienie, czy dany typ worka może zbierać wszystkie przedmioty
+*  `/kabza bagtype <bag_type_id> edit bagdescription add <line_no> <line>` - dodanie linii do opisu danego typu worka
+*  `/kabza bagtype <bag_type_id> edit bagdescription remove <line_no>` - usunięcie linii z opisu danego typu worka
+*  `/kabza bagtype <bag_type_id> edit bagdescription clear` - usunięcie całego opisu danego typu worka
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> set allnamesallowed <flag>` - ustawienie, czy dany dopuszczalny typ przedmiotu w worku może mieć jakikolwiek Lore
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> set allloresallowed <flag>` - ustawienie, czy dany dopuszczalby typ przedmiotu w worku może mieć jakąkolwiek nazwę
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> set nonameallowed <flag>` - ustawienie, czy dany dopuszczalny typ przedmiotu w worku może nie mieć nazwy (tj. mieć oryginalną nazwę z gry)
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> set noloreallowed <flag>` - ustawienie, czy dany dopuszczalny typ przedmiotu w worku może nie mieć Lore
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> edit names add <name>` - dodanie dopuszczalnej nazwy dla danego typuprzedmiotu w worku o danym typie
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> edit names remove <name_no>` - usunięcie dopuszczalnej nazwy dla dango typu przedmiotu w worku o danym typie
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> edit names clear` - usunięcie wszystkich dopuszczalnych nazw dla danego typu przedmiotu w worku o danym typie
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> edit lores <lore_no> add <line_no> <line>` - dodanie linii do danego Lore dla danego dopuszczalnego typu przedmiotu w worku o danym typie
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> edit lores <lore_no> remove all` - usunięcie danego Lore dla danego dopuszczalnego typu przedmiotu w worku o danym typie
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> edit lores <lore_no> remove <line_no>` - usunięcie linii z danego Lore dla danego dopuszczalnego typu przedmiotu w worku o danym typie
+*  `/kabza bagtype <bag_type_id> edit alloweditem <item_type> edit lores clear` - usunięcie wszystkich dopuszczalnych Lore dla danego typu przedmiotu w worku o danym typie
+*  `/kabza reload` - przeładowanie pluginu
 
 
 -----------------------

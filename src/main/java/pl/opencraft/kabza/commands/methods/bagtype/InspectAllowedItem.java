@@ -50,8 +50,8 @@ public class InspectAllowedItem extends BaseCmdMethod {
             sb.append(GRAY).append("no_lore_allowed: ").append(WHITE).append(bagTypeItem.isNoLoreAllowed()).append("\n");
 
             sb.append(GRAY).append("allowed_names:").append("\n");
-            for (String name : bagTypeItem.getNames()) {
-                sb.append(WHITE).append("- ").append(name).append("\n");
+            for (int i = 0, j = 1; i < bagTypeItem.getNames().size(); i++, j++) {
+                sb.append(WHITE).append(j).append(". ").append(bagTypeItem.getNames().get(i)).append("\n");
             }
 
             sb.append(GRAY).append("allowed_lores:").append("\n");

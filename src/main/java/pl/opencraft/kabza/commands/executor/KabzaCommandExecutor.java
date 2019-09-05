@@ -65,7 +65,7 @@ public class KabzaCommandExecutor implements CommandExecutor, TabCompleter {
                                                     ),
                                                     new CmdNode("clear").setMethod(new ClearBagDescription())
                                             ),
-                                            new CmdNode("alloweditems").subCmds(
+                                            new CmdNode("alloweditem").subCmds(
                                                     new CmdNode("<item_type>").subCmds(
                                                             new CmdNode("set").subCmds(
                                                                     new CmdNode("allnamesallowed").subCmds(
