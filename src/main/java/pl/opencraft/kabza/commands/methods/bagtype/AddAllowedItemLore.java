@@ -1,5 +1,6 @@
 package pl.opencraft.kabza.commands.methods.bagtype;
 
+import pl.opencraft.kabza.bags.repository.dto.BagTypeItemLore;
 import pl.opencraft.kabza.commands.base.BaseCmdMethod;
 import pl.opencraft.kabza.commands.base.CmdMethodParams;
 import pl.opencraft.kabza.messages.MessageEnum;
@@ -8,14 +9,14 @@ import static pl.opencraft.KabzaPlugin.plugin;
 import static pl.opencraft.kabza.commands.base.should.CmdParamsValidator.*;
 
 /**
- * Created by Marcin Zielonka on 30/08/2019.
+ * Created by Marcin Zielonka on 08/09/2019.
  */
 
-public class AddAllowedItemLoreLine extends BaseCmdMethod {
+public class AddAllowedItemLore extends BaseCmdMethod {
 
     @Override
     public String description() {
-        return plugin.messages.get(MessageEnum.CMD_INFO_ADD_ALLOWED_ITEM_LORE_LINE);
+        return plugin.messages.get(MessageEnum.CMD_INFO_ADD_ALLOWED_ITEM_LORE);
     }
 
     @Override
@@ -24,16 +25,16 @@ public class AddAllowedItemLoreLine extends BaseCmdMethod {
         should(bagTypeExists, params);
         should(itemTypeExists, params);
         should(allowedItemTypeExists, params);
-        should(allowedItemLoreLineIsValid, params);
 
         plugin.bagTypesService.findBagType(params.bagTypeId).ifPresent(bagType -> {
             bagType.findAllowedItemByType(params.itemType).ifPresent(bagTypeItem -> {
-                bagTypeItem.getLores().get(params.loreNo).getLore().add(params.lineNo, params.line);
+                bagTypeItem.getLores().add(new BagTypeItemLore());
+                int idx = bagTypeItem.getLores().size() - 1;
 
                 bagType.createOrUpdateAllowedItem(bagTypeItem);
                 plugin.bagTypesService.createOrUpdateBagType(bagType);
 
-                sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_ADDED_ALLOWED_ITEM_LORE_LINE));
+                sendSuccessMessage(params, plugin.messages.get(MessageEnum.CMD_SUCCESS_ADDED_ALLOWED_ITEM_LORE, String.valueOf(idx)));
             });
         });
     }

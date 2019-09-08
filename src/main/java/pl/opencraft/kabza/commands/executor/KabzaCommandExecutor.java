@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import pl.opencraft.kabza.commands.base.CmdNode;
 import pl.opencraft.kabza.commands.base.CmdRoot;
+import pl.opencraft.kabza.commands.base.DefaultCmdMethod;
 import pl.opencraft.kabza.commands.methods.GiveBag;
 import pl.opencraft.kabza.commands.methods.InspectBag;
 import pl.opencraft.kabza.commands.methods.Reload;
@@ -103,6 +104,7 @@ public class KabzaCommandExecutor implements CommandExecutor, TabCompleter {
                                                                                             new CmdNode("<line_no>").setMethod(new RemoveAllowedItemLoreLine())
                                                                                     )
                                                                             ),
+                                                                            new CmdNode("add").setMethod(new AddAllowedItemLore()),
                                                                             new CmdNode("clear").setMethod(new ClearAllowedItemLores())
                                                                     )
                                                             )

@@ -2,7 +2,9 @@ package pl.opencraft.kabza.bags.repository.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,10 +12,11 @@ import java.util.List;
  */
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class BagTypeItemLore {
 
-    private List<String> lore;
+    private List<String> lore = new ArrayList<>();
 
     public boolean equals(List<String> lore) {
         if(this.lore.size() != lore.size()) {
