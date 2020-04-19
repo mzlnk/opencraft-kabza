@@ -170,7 +170,7 @@ Aby umieścić plugin w repozytorium lokalnym, należy sklonować projekt, a nas
 
 ```text
 mvn clean package
-mvn install:install-file -Dfile=target/ocUtensils-2.0.jar -DgroupId=pl.opencraft -DartifactId=ocUtensils -Dversion=2.0 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/Kabza-0.7.1.jar -DgroupId=pl.opencraft -DartifactId=Kabza -Dversion=0.7.1 -Dpackaging=jar -DgeneratePom=true
 ```
 
 Aby skorzystać z API, należy dodać pole `<dependency>` w pliku `pom.xml`:
@@ -180,7 +180,7 @@ Aby skorzystać z API, należy dodać pole `<dependency>` w pliku `pom.xml`:
 <dependency>
     <groupId>pl.opencraft</groupId>
     <artifactId>Kabza</artifactId>
-    <version>1.0</version>
+    <version>0.7.1</version>
 </dependency>
 ```
 
@@ -204,4 +204,4 @@ public BagTypesService getBagTypesService();
 -----------------------
 ###Changelog
 
-* **v1.0 - Minecraft 1.14.4 - aktualna wersja pluginu. Wersja używana obecnie na serwerze**
+* **v1.0 - Minecraft 1.14.4 - aktualna wersja pluginu.**
