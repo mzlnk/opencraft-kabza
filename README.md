@@ -1,11 +1,12 @@
-#Kabza
+# Kabza
 
 Kabza to plugin, który umożliwia tworzenie specjalnych worków, do których automatycznie trafiają poszczególne przedmioty po ich zebraniu.
 Po otworzeniu worka, otrzymujemy skrzynkę z całą zawartością worka.
 
 
------------------------
-###Worki
+---
+
+### Worki
 
 Każdy z worków ma maksymalną pojemność 27 slotów (tj. max 27 stacków), tzn. zachowuje się tak jak skrzynka.
 
@@ -35,8 +36,9 @@ Każdy stworzony worek jest reprezentowany przez plik `*.json` w folderze `/bags
 ```
 
 
------------------------
-###Typy worków
+---
+
+### Typy worków
 
 Każdy typ worka reprezentowany jest przez plik `*.json` w folderze `/bagtypes`. Przykładowa struktura pliku:
 
@@ -110,8 +112,10 @@ Każdy typ worka reprezentowany jest przez plik `*.json` w folderze `/bagtypes`.
 }
 ```
 
------------------------
-###Komendy
+---
+
+
+### Komendy
 
 **Oznaczenia:**
 
@@ -155,14 +159,16 @@ Każdy typ worka reprezentowany jest przez plik `*.json` w folderze `/bagtypes`.
 *  `/kabza reload` - przeładowanie pluginu
 
 
------------------------
-###Permisje
+---
+
+### Permisje
 
 * `kabza.admin` - wymagane, aby korzystać z komend administracyjnych
 
 
------------------------
-###API dla innych pluginów
+---
+
+### API dla innych pluginów
 
 Plugin umożliwia korzystanie przez inne pluginy z jego funkcjonalności poprzez wystawione API:
 
@@ -201,7 +207,8 @@ public BagTypesService getBagTypesService();
 ```
 
 
------------------------
-###Changelog
+---
+
+### Changelog
 
 * **v1.0 - Minecraft 1.14.4 - aktualna wersja pluginu.**
